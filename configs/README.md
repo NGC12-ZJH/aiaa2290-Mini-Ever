@@ -4,6 +4,8 @@
 | --- | --- |
 | `base.json` | 正式实验模板。`null` 与空列表表示运行前必须确定的研究决定 |
 | `smoke.json` | 合成数据冒烟配置，参数已全部填写，可直接运行 |
+| `celeba_v1.json` | **正式实验配置，2026-11-24 冻结，不再修改**（配置哈希 `9d1bbe65…`）。取值依据见 [docs/exp00_analysis.md](../docs/exp00_analysis.md) |
+| `calib.json` | 校准用临时配置：数据段与 `celeba_v1` 相同，轮数为 1，输出写到 `runs/calib/`。只用于计时，不产出结果 |
 
 ```bash
 python -m mini_ever check-config --config configs/base.json   # 列出仍未确定的字段

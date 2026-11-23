@@ -3,6 +3,12 @@
 | 脚本 | 用途 |
 | --- | --- |
 | `make_synthetic_data.py` | 生成 CelebA 目录结构的合成数据（不含真人照片），配合 `configs/smoke.json` 跑通全流程 |
+| `download_celeba_mirror.sh` | 从 hf-mirror 的 `flwrlabs/celeba` 并行下载 25 个 parquet 分片，并按 LFS 哈希校验 |
+| `convert_celeba_parquet.py` | 把 parquet 分片转成 `data/celeba/img_align_celeba/` 与 `identity_CelebA.txt`（需另装 pyarrow） |
+| `make_calib_configs.py` | 由 `configs/calib.json` 生成阶段 1 校准用的学习率与 ArcFace 参数变体 |
+| `check_stage1_convergence.py` | 报告公开基础模型在公开池训练照片上的准确率，用于检查收敛；不看 exp00 阳性对照 |
+
+CelebA 准备与校准的完整过程见 [docs/exp00_analysis.md](../docs/exp00_analysis.md)。
 
 训练、划分与实验统一通过命令行运行，见根目录 README「开始使用」：
 

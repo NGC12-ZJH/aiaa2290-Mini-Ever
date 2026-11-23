@@ -1,0 +1,211 @@
+{
+  "meta": {
+    "timestamp": "2026-11-23T17:15:23+00:00",
+    "git_commit": "4baf7089dbe884617325ba3cd6b90e85f2671398",
+    "config_sha256": "9d1bbe65cd11dc2f2645ba69fccf0d09130189f173e1cc9c461492766f2caf0f",
+    "manifest_sha256": "904b9a8214ce8f79e3448c9a6c6ab30a675eb14f24c93c4416a28a3759edca22",
+    "canary_sha256": "dc4bb94789a025849306b53a2d6b2e3675eec0d0df0e02059ea03c90eb2dff0f",
+    "training_seeds": [
+      1,
+      2,
+      3
+    ],
+    "device": "cuda",
+    "torch": "2.11.0+cu128",
+    "python": "3.10.12"
+  },
+  "experiment": "exp00_prior_familiarity",
+  "margin": 0.1,
+  "results": {
+    "forget_vs_other_user": {
+      "imagenet_init": {
+        "group_0": {
+          "verification_tar_at_far": {
+            "forget_mean": 0.019444444444444448,
+            "other_mean": 0.013639846743295,
+            "difference": {
+              "value": 0.005804597701149428,
+              "low": -0.0043917624521072835,
+              "high": 0.01615038314176245,
+              "n": 600,
+              "confidence": 0.9
+            },
+            "verdict": "pass"
+          },
+          "retrieval_top1": {
+            "forget_mean": 0.06,
+            "other_mean": 0.06666666666666668,
+            "difference": {
+              "value": -0.006666666666666682,
+              "low": -0.037189655172413794,
+              "high": 0.024252873563218383,
+              "n": 600,
+              "confidence": 0.9
+            },
+            "verdict": "pass"
+          }
+        },
+        "group_1": {
+          "verification_tar_at_far": {
+            "forget_mean": 0.01888888888888889,
+            "other_mean": 0.013659003831417606,
+            "difference": {
+              "value": 0.005229885057471266,
+              "low": -0.011189655172413793,
+              "high": 0.023869731800766285,
+              "n": 600,
+              "confidence": 0.9
+            },
+            "verdict": "pass"
+          },
+          "retrieval_top1": {
+            "forget_mean": 0.04333333333333333,
+            "other_mean": 0.06724137931034484,
+            "difference": {
+              "value": -0.023908045977011495,
+              "low": -0.05638505747126437,
+              "high": 0.012186781609195394,
+              "n": 600,
+              "confidence": 0.9
+            },
+            "verdict": "pass"
+          }
+        },
+        "group_2": {
+          "verification_tar_at_far": {
+            "forget_mean": 0.03055555555555555,
+            "other_mean": 0.013256704980842894,
+            "difference": {
+              "value": 0.01729885057471264,
+              "low": 0.0005919540229885046,
+              "high": 0.03657375478927203,
+              "n": 600,
+              "confidence": 0.9
+            },
+            "verdict": "pass"
+          },
+          "retrieval_top1": {
+            "forget_mean": 0.11666666666666665,
+            "other_mean": 0.06471264367816092,
+            "difference": {
+              "value": 0.05195402298850574,
+              "low": 0.0124080459770115,
+              "high": 0.0918965517241379,
+              "n": 600,
+              "confidence": 0.9
+            },
+            "verdict": "pass"
+          }
+        }
+      },
+      "public_base": {
+        "group_0": {
+          "verification_tar_at_far": {
+            "forget_mean": 0.1633333333333333,
+            "other_mean": 0.16712643678160988,
+            "difference": {
+              "value": -0.0037931034482759085,
+              "low": -0.05533620689655173,
+              "high": 0.04747892720306513,
+              "n": 600,
+              "confidence": 0.9
+            },
+            "verdict": "pass"
+          },
+          "retrieval_top1": {
+            "forget_mean": 0.24666666666666667,
+            "other_mean": 0.2536781609195401,
+            "difference": {
+              "value": -0.007011494252873535,
+              "low": -0.08780459770114943,
+              "high": 0.07489080459770123,
+              "n": 600,
+              "confidence": 0.9
+            },
+            "verdict": "pass"
+          }
+        },
+        "group_1": {
+          "verification_tar_at_far": {
+            "forget_mean": 0.09277777777777778,
+            "other_mean": 0.16955938697318074,
+            "difference": {
+              "value": -0.07678160919540229,
+              "low": -0.1211417624521073,
+              "high": -0.023503831417624514,
+              "n": 600,
+              "confidence": 0.9
+            },
+            "verdict": "uncertain"
+          },
+          "retrieval_top1": {
+            "forget_mean": 0.12166666666666667,
+            "other_mean": 0.2579885057471264,
+            "difference": {
+              "value": -0.13632183908045978,
+              "low": -0.1985086206896552,
+              "high": -0.0662528735632184,
+              "n": 600,
+              "confidence": 0.9
+            },
+            "verdict": "uncertain"
+          }
+        },
+        "group_2": {
+          "verification_tar_at_far": {
+            "forget_mean": 0.24222222222222226,
+            "other_mean": 0.16440613026819983,
+            "difference": {
+              "value": 0.07781609195402303,
+              "low": -0.005900383141762472,
+              "high": 0.1679932950191571,
+              "n": 600,
+              "confidence": 0.9
+            },
+            "verdict": "uncertain"
+          },
+          "retrieval_top1": {
+            "forget_mean": 0.3266666666666667,
+            "other_mean": 0.25091954022988494,
+            "difference": {
+              "value": 0.07574712643678166,
+              "low": -0.01995689655172422,
+              "high": 0.1767844827586207,
+              "n": 600,
+              "confidence": 0.9
+            },
+            "verdict": "uncertain"
+          }
+        }
+      }
+    },
+    "positive_control": {
+      "verification_tar_at_far": {
+        "public_mean": 0.32723015873015926,
+        "user_mean": 0.16996296296296365,
+        "difference": {
+          "value": 0.15726719576719578,
+          "low": 0.13087374338624339,
+          "high": 0.18327830687830693,
+          "n": 1000,
+          "confidence": 0.9
+        },
+        "sensitivity": "detected",
+        "verdict": "pass"
+      },
+      "retrieval_top1": {
+        "public_mean": 0.40858333333333346,
+        "user_mean": 0.20900000000000027,
+        "difference": {
+          "value": 0.19958333333333333,
+          "low": 0.17094444444444445,
+          "high": 0.22997499999999996,
+          "n": 1000,
+          "confidence": 0.9
+        },
+        "sensitivity": "detected",
+        "verdict": "pass"
+      }
+    }
+  }
+}
