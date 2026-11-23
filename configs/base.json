@@ -6,10 +6,19 @@
     "local_root": "data/celeba",
     "min_images_per_identity": 25,
     "target_identities": 1000,
+    "identity_pools": {"public": 0.4, "user": 0.6},
     "split_ratios": {"train": 0.7, "gallery": 0.1, "test": 0.2},
+    "accounts": {
+      "self_share": 0.6,
+      "other_uploaders_per_identity": 2,
+      "other_uploaders_are_virtual": true
+    },
+    "forget_pool": "user",
+    "forget_units": ["account", "person"],
     "forget_identities_per_group": 20,
     "forget_group_count": null,
     "split_seed": null,
+    "account_seed": null,
     "training_seeds": []
   },
   "model": {
@@ -20,7 +29,11 @@
     "loss": "arcface"
   },
   "training": {
-    "epochs": null,
+    "two_stage": true,
+    "stage1_data": "public_pool",
+    "stage2_data": "public_pool_plus_user_pool",
+    "stage1_epochs": null,
+    "stage2_epochs": null,
     "optimizer": null,
     "learning_rate": null,
     "batch_size": null,
@@ -30,15 +43,25 @@
   "sisa": {
     "shard_counts": [4, 8, 16],
     "partition_unit": "identity",
+    "partitioned_pool": "user",
+    "shard_initialization": "public_base_model",
+    "include_public_pool_in_shards": null,
     "backbone": "resnet18",
     "embedding_aggregation": "concatenate_normalized",
     "slicing_enabled": false
   },
+  "tracking": {
+    "artifact_manifest": true,
+    "archive_checkpoints": true
+  },
   "evaluation": {
     "reference": "matched_never_trained",
+    "reference_types": ["person", "account"],
     "quantization_bits": [8, 4],
     "relearning_images_per_forget_identity": 5,
     "relearning_steps": 50,
+    "trace_miss_rates": [0.0, 0.05, 0.2, 0.4],
+    "trace_miss_seed": null,
     "shadow_model_count": null,
     "equivalence_margins": null,
     "confidence_level": null
