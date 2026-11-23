@@ -162,6 +162,7 @@ aiaa2290-Mini-Ever/
 ├── configs/                  # 数据、模型、训练及实验配置模板
 │   └── base.json
 ├── docs/
+│   ├── overview.md           # 通俗版说明：设计、三环对应与预期结果
 │   ├── protocol.md           # 对照、统计与可复现约定
 │   ├── roadmap.md            # 排期、最小可行版与展示映射
 │   ├── references.md         # 原方案参考文献与核验状态
@@ -187,7 +188,7 @@ git clone https://github.com/NGC12-ZJH/aiaa2290-Mini-Ever.git
 cd aiaa2290-Mini-Ever
 ```
 
-先阅读 [实验协议](docs/protocol.md) 与 [实施路线](docs/roadmap.md)，再按授权渠道准备本地数据。优先实现数据划分、基线训练与 never-trained 参照，确认性能及实际耗时后再扩展遗忘方法。
+想快速了解项目，先看 [通俗版说明](docs/overview.md)。实施前阅读 [实验协议](docs/protocol.md) 与 [实施路线](docs/roadmap.md)，再按授权渠道准备本地数据。优先实现数据划分、基线训练与 never-trained 参照，确认性能及实际耗时后再扩展遗忘方法。
 
 ## 公开范围与数据边界
 
