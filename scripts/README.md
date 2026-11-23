@@ -1,3 +1,16 @@
-# 工具脚本规划
+# 辅助脚本
 
-后续放置数据准备、基线训练、参照训练、影子模型训练、批量实验和汇总出图入口。脚本应支持显式数据路径和配置路径；删除实验只操作实验副本，不触碰源数据。当前没有实现，README 不提供虚构运行命令。
+| 脚本 | 用途 |
+| --- | --- |
+| `make_synthetic_data.py` | 生成 CelebA 目录结构的合成数据（不含真人照片），配合 `configs/smoke.json` 跑通全流程 |
+
+训练、划分与实验统一通过命令行运行，见根目录 README「开始使用」：
+
+```bash
+python -m mini_ever check-config --config <配置>
+python -m mini_ever make-split   --config <配置>
+python -m mini_ever train main   --config <配置>
+python -m mini_ever run exp01    --config <配置> [--groups 0 1] [--seeds 1 2]
+```
+
+删除实验只在划分清单定义的训练集合上操作，从不修改源数据文件。

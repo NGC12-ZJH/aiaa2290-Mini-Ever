@@ -1,0 +1,73 @@
+{
+  "status": "smoke_test_synthetic_data",
+  "project": "aiaa2290-Mini-Ever",
+  "data": {
+    "dataset": "synthetic",
+    "local_root": "data/synthetic",
+    "image_dir": "images",
+    "identity_file": "identity_synthetic.txt",
+    "min_images_per_identity": 20,
+    "target_identities": 40,
+    "identity_pools": {"public": 0.4, "user": 0.6},
+    "split_ratios": {"train": 0.7, "gallery": 0.1, "test": 0.2},
+    "accounts": {"self_share": 0.6, "other_uploaders_per_identity": 2, "other_uploaders_are_virtual": true},
+    "forget_pool": "user",
+    "forget_units": ["account", "person"],
+    "forget_identities_per_group": 4,
+    "forget_group_count": 2,
+    "split_seed": 11,
+    "account_seed": 12,
+    "training_seeds": [1, 2],
+    "manifest_path": "data/synthetic/manifest.json"
+  },
+  "model": {
+    "backbone": "tiny_cnn",
+    "initialization": "random",
+    "forbid_face_pretrained_weights": true,
+    "input_size": [32, 32],
+    "embedding_dim": 16,
+    "loss": "arcface",
+    "arcface_scale": 16.0,
+    "arcface_margin": 0.2
+  },
+  "training": {
+    "stage1_epochs": 3,
+    "stage2_epochs": 3,
+    "optimizer": "sgd",
+    "learning_rate": 0.05,
+    "batch_size": 32,
+    "amp": false,
+    "num_workers": 0
+  },
+  "sisa": {
+    "shard_counts": [2],
+    "include_public_pool_in_shards": true,
+    "backbone": "tiny_cnn",
+    "sequential_requests": 3,
+    "full_chain_every": 3
+  },
+  "canary": {"enabled": true, "fraction_of_forget_train_images": 0.2, "patch_fraction": 0.2, "seed": 13},
+  "distill": {"student_backbone": "tiny_cnn", "epochs": 2, "learning_rate": 0.05, "batch_size": 32},
+  "unlearning": {
+    "learning_rate": 0.01,
+    "batch_size": 16,
+    "finetune_epochs": 1,
+    "neggrad_epochs": 1,
+    "scrub_epochs": 1
+  },
+  "evaluation": {
+    "prior_familiarity_check": {"equivalence_margin": 0.1},
+    "quantization_bits": [8, 4],
+    "relearning_steps": 6,
+    "relearning_eval_every": 3,
+    "trace_miss_rates": [0.0, 0.2, 0.4],
+    "trace_miss_seed": 14,
+    "shadow_model_count": 3,
+    "equivalence_margins": {"leakage": 0.2, "l1": 0.1, "l2": 0.1, "l4": 0.1, "l5": 0.1},
+    "confidence_level": 0.9,
+    "bootstrap_samples": 200,
+    "far_target": 0.05,
+    "lfw_root": "data/synthetic/lfw-not-present"
+  },
+  "paths": {"runs_dir": "runs/smoke", "results_dir": "results/smoke"}
+}

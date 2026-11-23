@@ -4,7 +4,7 @@ Mini-Ever 是 AIAA2290 的小规模人脸识别与机器遗忘实验项目。项
 
 > Deleting a record is an operation; forgetting a person is a claim — and a claim needs proof.
 
-**当前状态：实验规划与仓库骨架已建立，训练、遗忘与评估代码尚未实现，尚无实测结果。** 本文根据《Mini-Ever 实验方案：用实验检验 T→D→M 锁链》（2026-11-23）整理。所有预期效果、算力预算及时间安排均为待检验的计划，不代表 Ever 或任何工业系统的真实表现。
+**当前状态：实验代码已实现，并在合成数据上通过测试与端到端冒烟运行；尚未在 CelebA 上运行，尚无实测结果。** 本文根据《Mini-Ever 实验方案：用实验检验 T→D→M 锁链》（2026-11-23）整理。所有预期效果、算力预算及时间安排均为待检验的计划，不代表 Ever 或任何工业系统的真实表现。
 
 ## 研究问题
 
@@ -177,8 +177,10 @@ A–D 只给出四个离散点。本组在配置 D（其余环节全部做到）
 ```text
 aiaa2290-Mini-Ever/
 ├── README.md
-├── configs/                  # 数据、模型、训练及实验配置模板
-│   └── base.json
+├── pyproject.toml            # 包与依赖（numpy、pillow、torch、torchvision）
+├── configs/
+│   ├── base.json             # 正式实验配置；null 表示运行前必须确定的研究决定
+│   └── smoke.json            # 合成数据冒烟配置（CPU、小网络，可直接运行）
 ├── docs/
 │   ├── overview.md           # 通俗版说明：设计、三环对应与预期结果
 │   ├── protocol.md           # 对照、统计与可复现约定
@@ -186,27 +188,78 @@ aiaa2290-Mini-Ever/
 │   ├── references.md         # 原方案参考文献与核验状态
 │   └── everalbum_paravision.md  # Ever 案例事实与出处（设计依据）
 ├── src/mini_ever/
-│   ├── data/                 # 筛选、划分、身份去重、示踪
-│   ├── models/               # ArcFace、gallery、蒸馏、量化
-│   ├── unlearning/           # FT、NegGrad+、SCRUB、重训、SISA
-│   └── evaluation/           # 效用、U-LiRA、L1–L5、端到端测量
-├── experiments/              # 四组实验的入口规划
-├── scripts/                  # 数据准备、批量运行与出图入口规划
-├── tests/                    # 后续数据隔离、分片与指标测试
+│   ├── config.py             # 类型化配置；列出未定参数，拒绝人脸预训练权重
+│   ├── context.py            # 实验上下文：数据、模型缓存、产物清单、结果写入
+│   ├── cli.py                # python -m mini_ever ...
+│   ├── data/                 # CelebA、划分清单（身份池/账户/遗忘组）、删除请求、暗号、LFW、合成数据
+│   ├── models/               # ResNet + ArcFace、gallery、权重量化、产物版本清单
+│   ├── training/             # 训练循环、特征提取、蒸馏
+│   ├── unlearning/           # 输出过滤、FT、NegGrad+、SCRUB、全量重训、SISA
+│   ├── evaluation/           # 逐人分数、统计与四状态判定、泄露、U-LiRA、重新学习、L1–L5、效用
+│   └── experiments/          # exp00–exp04 运行器
+├── experiments/              # 实验入口与说明
+├── scripts/                  # 合成数据生成等辅助脚本
+├── tests/                    # 数据隔离、统计、模型与端到端测试（合成数据）
 ├── data/                     # 本地数据，内容不提交
 └── results/                  # 仅公开汇总结果与不可识别图表
 ```
 
-每个目录内有用途说明。`configs/base.json` 是规划模板，尚无训练程序消费它。当前没有可运行的训练命令；环境依赖将在实现与兼容性验证后固定。
+代码模块与 README 各节一一对应：`experiments/exp0N_*.py` 的文档字符串说明该实验比较什么、与哪个参照比较。
 
 ## 开始使用
+
+### 1. 安装
 
 ```bash
 git clone https://github.com/NGC12-ZJH/aiaa2290-Mini-Ever.git
 cd aiaa2290-Mini-Ever
+pip install -e ".[dev]"
 ```
 
-想快速了解项目，先看 [通俗版说明](docs/overview.md)。实施前阅读 [实验协议](docs/protocol.md) 与 [实施路线](docs/roadmap.md)，再按授权渠道准备本地数据。优先实现数据划分、基线训练与 never-trained 参照，确认性能及实际耗时后再扩展遗忘方法。
+需要 Python ≥ 3.10、PyTorch ≥ 2.1。没有 GPU 时自动使用 CPU。
+
+### 2. 用合成数据跑通全流程（几分钟，CPU 即可）
+
+合成数据不含任何真人照片，只用于检查代码链路，**不产生研究结论**。
+
+```bash
+python scripts/make_synthetic_data.py --out data/synthetic
+python -m mini_ever make-split --config configs/smoke.json
+python -m mini_ever run exp00 --config configs/smoke.json --no-crop
+python -m pytest
+```
+
+`exp00` 可替换为 `exp01`–`exp04`。结果写入 `results/smoke/`，模型缓存在 `runs/smoke/`，两者都不提交。
+
+### 3. 正式实验（CelebA）
+
+1. 按授权渠道把 CelebA 放到 `data/celeba/`（`img_align_celeba/` 与 `identity_CelebA.txt`），LFW 可选放到 `data/lfw/`。
+2. 复制 `configs/base.json`，填写所有 `null` 项（种子、训练轮数、学习率、等效界值等），并按 [实验协议](docs/protocol.md) 在运行前登记。
+3. 检查配置并生成划分：
+
+```bash
+python -m mini_ever check-config --config configs/my_run.json
+python -m mini_ever make-split --config configs/my_run.json
+```
+
+4. 按 roadmap 顺序运行：先 `exp00`（起点检查须先通过），再 `exp01`–`exp04`：
+
+```bash
+python -m mini_ever run exp00 --config configs/my_run.json
+```
+
+配置中仍有未定参数时，`train` 与 `run` 会拒绝启动。模型按“配置 + 划分 + 删除集合 + 种子”缓存，重复运行不会重复训练；更改划分或配置会自动使用新的缓存。
+
+想快速了解项目，先看 [通俗版说明](docs/overview.md)；实施细节见 [实验协议](docs/protocol.md) 与 [实施路线](docs/roadmap.md)。
+
+### 实现中的约定
+
+- **参照模型的种子**：被评估模型使用配置中的训练种子，参照模型使用派生种子。即使是全量重训，也与独立训练的参照比较，从而如实反映种子间噪声。
+- **节点泄露**：遗忘组每人在新照片上的分数，与参照系统同一节点对比，取区分优势 `max(0, 2·AUC − 1)`，并按身份做 bootstrap；端到端泄露取各节点最大值。
+- **U-LiRA**：影子模型按训练种子区分（数据由划分清单固定），这是对原协议的简化，结果中会注明；每类至少 3 个影子模型，否则 L2 回退为标注“探索性”的简化基线。
+- **量化**：部署副本采用逐通道对称的权重四舍五入量化（`weight_only_rtn`），权重值与 INT8/INT4 权重量化部署一致；激活量化不在范围内。
+- **输出过滤**：在 L1 与量化副本中保留过滤；L4 重新学习视为持有权重的攻击者，会关闭过滤。
+- **公开结果**：结果文件只包含组级统计，不含身份编号或图片编号。
 
 ## 公开范围与数据边界
 
