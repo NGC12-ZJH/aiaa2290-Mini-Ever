@@ -1,0 +1,1701 @@
+{
+  "meta": {
+    "timestamp": "2026-11-23T23:40:48+00:00",
+    "git_commit": "11795a28b0b65e4b9f7eaa974b42ca7e18889df7",
+    "config_sha256": "9d1bbe65cd11dc2f2645ba69fccf0d09130189f173e1cc9c461492766f2caf0f",
+    "manifest_sha256": "904b9a8214ce8f79e3448c9a6c6ab30a675eb14f24c93c4416a28a3759edca22",
+    "canary_sha256": "dc4bb94789a025849306b53a2d6b2e3675eec0d0df0e02059ea03c90eb2dff0f",
+    "training_seeds": [
+      1,
+      2,
+      3
+    ],
+    "device": "cuda",
+    "torch": "2.11.0+cu128",
+    "python": "3.10.12"
+  },
+  "experiment": "exp04_weakest_link",
+  "approximate_method": "neggrad_plus",
+  "trace_miss_rates": [
+    0.0,
+    0.05,
+    0.2,
+    0.4
+  ],
+  "groups": {
+    "group_0": {
+      "configurations": {
+        "A": {
+          "nodes": [
+            {
+              "node": "gallery",
+              "leakage": {
+                "value": 1.0,
+                "low": 1.0,
+                "high": 1.0,
+                "n": 20,
+                "confidence": 0.9
+              },
+              "node_mean": 0.5062016308307647,
+              "reference_mean": -1.0,
+              "verdict": "fail"
+            },
+            {
+              "node": "main",
+              "leakage": {
+                "value": 0.4950000000000001,
+                "low": 0.385,
+                "high": 0.6699999999999999,
+                "n": 20,
+                "confidence": 0.9
+              },
+              "node_mean": 0.5015180831154187,
+              "reference_mean": 0.39752832874655725,
+              "verdict": "fail"
+            },
+            {
+              "node": "student",
+              "leakage": {
+                "value": 0.03499999999999992,
+                "low": 0.0,
+                "high": 0.135,
+                "n": 20,
+                "confidence": 0.9
+              },
+              "node_mean": 0.5193383000791072,
+              "reference_mean": 0.5140356481075286,
+              "verdict": "uncertain"
+            },
+            {
+              "node": "deployment",
+              "leakage": {
+                "value": 0.49,
+                "low": 0.375,
+                "high": 0.6699999999999999,
+                "n": 20,
+                "confidence": 0.9
+              },
+              "node_mean": 0.5010020929078262,
+              "reference_mean": 0.39791618126134076,
+              "verdict": "fail"
+            }
+          ],
+          "end_to_end": {
+            "leakage": {
+              "value": 1.0,
+              "low": 1.0,
+              "high": 1.0,
+              "n": 20,
+              "confidence": 0.9
+            },
+            "weakest_node": "gallery",
+            "credibility": 0.0,
+            "mean_leakage": 0.505,
+            "verdict": "fail"
+          }
+        },
+        "B": {
+          "nodes": [
+            {
+              "node": "gallery",
+              "leakage": {
+                "value": 1.0,
+                "low": 1.0,
+                "high": 1.0,
+                "n": 20,
+                "confidence": 0.9
+              },
+              "node_mean": 0.5062016308307647,
+              "reference_mean": -1.0,
+              "verdict": "fail"
+            },
+            {
+              "node": "main",
+              "leakage": {
+                "value": 0.010000000000000009,
+                "low": 0.0,
+                "high": 0.10000000000000009,
+                "n": 20,
+                "confidence": 0.9
+              },
+              "node_mean": 0.40164153302709266,
+              "reference_mean": 0.39752832874655725,
+              "verdict": "uncertain"
+            },
+            {
+              "node": "student",
+              "leakage": {
+                "value": 0.03499999999999992,
+                "low": 0.0,
+                "high": 0.14500000000000002,
+                "n": 20,
+                "confidence": 0.9
+              },
+              "node_mean": 0.5193383000791072,
+              "reference_mean": 0.5140356481075286,
+              "verdict": "uncertain"
+            },
+            {
+              "node": "deployment",
+              "leakage": {
+                "value": 0.004999999999999893,
+                "low": 0.0,
+                "high": 0.10000000000000009,
+                "n": 20,
+                "confidence": 0.9
+              },
+              "node_mean": 0.4016555507977803,
+              "reference_mean": 0.39791618126134076,
+              "verdict": "uncertain"
+            }
+          ],
+          "end_to_end": {
+            "leakage": {
+              "value": 1.0,
+              "low": 1.0,
+              "high": 1.0,
+              "n": 20,
+              "confidence": 0.9
+            },
+            "weakest_node": "gallery",
+            "credibility": 0.0,
+            "mean_leakage": 0.26249999999999996,
+            "verdict": "fail"
+          }
+        },
+        "C": {
+          "nodes": [
+            {
+              "node": "gallery",
+              "leakage": {
+                "value": 0.0,
+                "low": 0.0,
+                "high": 0.0,
+                "n": 20,
+                "confidence": 0.9
+              },
+              "node_mean": -1.0,
+              "reference_mean": -1.0,
+              "verdict": "pass"
+            },
+            {
+              "node": "main",
+              "leakage": {
+                "value": 0.4850000000000001,
+                "low": 0.38474999999999987,
+                "high": 0.655,
+                "n": 20,
+                "confidence": 0.9
+              },
+              "node_mean": 0.49010417213042573,
+              "reference_mean": 0.39752832874655725,
+              "verdict": "fail"
+            },
+            {
+              "node": "student",
+              "leakage": {
+                "value": 0.06000000000000005,
+                "low": 0.0,
+                "high": 0.17500000000000004,
+                "n": 20,
+                "confidence": 0.9
+              },
+              "node_mean": 0.5231340530018013,
+              "reference_mean": 0.5140356481075286,
+              "verdict": "uncertain"
+            },
+            {
+              "node": "deployment",
+              "leakage": {
+                "value": 0.4850000000000001,
+                "low": 0.385,
+                "high": 0.6499999999999999,
+                "n": 20,
+                "confidence": 0.9
+              },
+              "node_mean": 0.4903751986722152,
+              "reference_mean": 0.39791618126134076,
+              "verdict": "fail"
+            }
+          ],
+          "end_to_end": {
+            "leakage": {
+              "value": 0.4850000000000001,
+              "low": 0.385,
+              "high": 0.6499999999999999,
+              "n": 20,
+              "confidence": 0.9
+            },
+            "weakest_node": "main",
+            "credibility": 0.5149999999999999,
+            "mean_leakage": 0.25750000000000006,
+            "verdict": "fail"
+          }
+        },
+        "D": {
+          "nodes": [
+            {
+              "node": "gallery",
+              "leakage": {
+                "value": 0.0,
+                "low": 0.0,
+                "high": 0.0,
+                "n": 20,
+                "confidence": 0.9
+              },
+              "node_mean": -1.0,
+              "reference_mean": -1.0,
+              "verdict": "pass"
+            },
+            {
+              "node": "main",
+              "leakage": {
+                "value": 0.010000000000000009,
+                "low": 0.0,
+                "high": 0.10000000000000009,
+                "n": 20,
+                "confidence": 0.9
+              },
+              "node_mean": 0.40164153302709266,
+              "reference_mean": 0.39752832874655725,
+              "verdict": "uncertain"
+            },
+            {
+              "node": "student",
+              "leakage": {
+                "value": 0.0,
+                "low": 0.0,
+                "high": 0.06499999999999995,
+                "n": 20,
+                "confidence": 0.9
+              },
+              "node_mean": 0.5174354583024978,
+              "reference_mean": 0.5140356481075286,
+              "verdict": "pass"
+            },
+            {
+              "node": "deployment",
+              "leakage": {
+                "value": 0.004999999999999893,
+                "low": 0.0,
+                "high": 0.10000000000000009,
+                "n": 20,
+                "confidence": 0.9
+              },
+              "node_mean": 0.4016555507977803,
+              "reference_mean": 0.39791618126134076,
+              "verdict": "uncertain"
+            }
+          ],
+          "end_to_end": {
+            "leakage": {
+              "value": 0.010000000000000009,
+              "low": 0.0,
+              "high": 0.1100000000000001,
+              "n": 20,
+              "confidence": 0.9
+            },
+            "weakest_node": "main",
+            "credibility": 0.99,
+            "mean_leakage": 0.0037499999999999756,
+            "verdict": "uncertain"
+          }
+        }
+      },
+      "trace_miss": {
+        "0": {
+          "nodes": [
+            {
+              "node": "gallery",
+              "leakage": {
+                "value": 0.0,
+                "low": 0.0,
+                "high": 0.0,
+                "n": 20,
+                "confidence": 0.9
+              },
+              "node_mean": -1.0,
+              "reference_mean": -1.0,
+              "verdict": "pass"
+            },
+            {
+              "node": "main",
+              "leakage": {
+                "value": 0.010000000000000009,
+                "low": 0.0,
+                "high": 0.10000000000000009,
+                "n": 20,
+                "confidence": 0.9
+              },
+              "node_mean": 0.40164153302709266,
+              "reference_mean": 0.39752832874655725,
+              "verdict": "uncertain"
+            },
+            {
+              "node": "student",
+              "leakage": {
+                "value": 0.0,
+                "low": 0.0,
+                "high": 0.06499999999999995,
+                "n": 20,
+                "confidence": 0.9
+              },
+              "node_mean": 0.5174354583024978,
+              "reference_mean": 0.5140356481075286,
+              "verdict": "pass"
+            },
+            {
+              "node": "deployment",
+              "leakage": {
+                "value": 0.004999999999999893,
+                "low": 0.0,
+                "high": 0.09499999999999997,
+                "n": 20,
+                "confidence": 0.9
+              },
+              "node_mean": 0.4016555507977803,
+              "reference_mean": 0.39791618126134076,
+              "verdict": "pass"
+            }
+          ],
+          "end_to_end": {
+            "leakage": {
+              "value": 0.010000000000000009,
+              "low": 0.0,
+              "high": 0.1100000000000001,
+              "n": 20,
+              "confidence": 0.9
+            },
+            "weakest_node": "main",
+            "credibility": 0.99,
+            "mean_leakage": 0.0037499999999999756,
+            "verdict": "uncertain"
+          }
+        },
+        "0.05": {
+          "nodes": [
+            {
+              "node": "gallery",
+              "leakage": {
+                "value": 0.0,
+                "low": 0.0,
+                "high": 0.0,
+                "n": 20,
+                "confidence": 0.9
+              },
+              "node_mean": -1.0,
+              "reference_mean": -1.0,
+              "verdict": "pass"
+            },
+            {
+              "node": "main",
+              "leakage": {
+                "value": 0.03499999999999992,
+                "low": 0.0,
+                "high": 0.135,
+                "n": 20,
+                "confidence": 0.9
+              },
+              "node_mean": 0.4053812727332115,
+              "reference_mean": 0.39752832874655725,
+              "verdict": "uncertain"
+            },
+            {
+              "node": "student",
+              "leakage": {
+                "value": 0.03499999999999992,
+                "low": 0.0,
+                "high": 0.1200000000000001,
+                "n": 20,
+                "confidence": 0.9
+              },
+              "node_mean": 0.520313756664594,
+              "reference_mean": 0.5140356481075286,
+              "verdict": "uncertain"
+            },
+            {
+              "node": "deployment",
+              "leakage": {
+                "value": 0.030000000000000027,
+                "low": 0.0,
+                "high": 0.1299999999999999,
+                "n": 20,
+                "confidence": 0.9
+              },
+              "node_mean": 0.40544426565368974,
+              "reference_mean": 0.39791618126134076,
+              "verdict": "uncertain"
+            }
+          ],
+          "end_to_end": {
+            "leakage": {
+              "value": 0.03499999999999992,
+              "low": 0.004999999999999893,
+              "high": 0.1499999999999999,
+              "n": 20,
+              "confidence": 0.9
+            },
+            "weakest_node": "main",
+            "credibility": 0.9650000000000001,
+            "mean_leakage": 0.024999999999999967,
+            "verdict": "uncertain"
+          }
+        },
+        "0.2": {
+          "nodes": [
+            {
+              "node": "gallery",
+              "leakage": {
+                "value": 0.0,
+                "low": 0.0,
+                "high": 0.0,
+                "n": 20,
+                "confidence": 0.9
+              },
+              "node_mean": -1.0,
+              "reference_mean": -1.0,
+              "verdict": "pass"
+            },
+            {
+              "node": "main",
+              "leakage": {
+                "value": 0.1399999999999999,
+                "low": 0.08499999999999996,
+                "high": 0.25,
+                "n": 20,
+                "confidence": 0.9
+              },
+              "node_mean": 0.41813069209456444,
+              "reference_mean": 0.39752832874655725,
+              "verdict": "uncertain"
+            },
+            {
+              "node": "student",
+              "leakage": {
+                "value": 0.030000000000000027,
+                "low": 0.0,
+                "high": 0.1299999999999999,
+                "n": 20,
+                "confidence": 0.9
+              },
+              "node_mean": 0.5142447263002395,
+              "reference_mean": 0.5140356481075286,
+              "verdict": "uncertain"
+            },
+            {
+              "node": "deployment",
+              "leakage": {
+                "value": 0.125,
+                "low": 0.07499999999999996,
+                "high": 0.24,
+                "n": 20,
+                "confidence": 0.9
+              },
+              "node_mean": 0.4182174426813921,
+              "reference_mean": 0.39791618126134076,
+              "verdict": "uncertain"
+            }
+          ],
+          "end_to_end": {
+            "leakage": {
+              "value": 0.1399999999999999,
+              "low": 0.08499999999999996,
+              "high": 0.2549999999999999,
+              "n": 20,
+              "confidence": 0.9
+            },
+            "weakest_node": "main",
+            "credibility": 0.8600000000000001,
+            "mean_leakage": 0.07374999999999998,
+            "verdict": "uncertain"
+          }
+        },
+        "0.4": {
+          "nodes": [
+            {
+              "node": "gallery",
+              "leakage": {
+                "value": 0.0,
+                "low": 0.0,
+                "high": 0.0,
+                "n": 20,
+                "confidence": 0.9
+              },
+              "node_mean": -1.0,
+              "reference_mean": -1.0,
+              "verdict": "pass"
+            },
+            {
+              "node": "main",
+              "leakage": {
+                "value": 0.20500000000000007,
+                "low": 0.1499999999999999,
+                "high": 0.3500000000000001,
+                "n": 20,
+                "confidence": 0.9
+              },
+              "node_mean": 0.43559365334610145,
+              "reference_mean": 0.39752832874655725,
+              "verdict": "fail"
+            },
+            {
+              "node": "student",
+              "leakage": {
+                "value": 0.014999999999999902,
+                "low": 0.0,
+                "high": 0.09499999999999997,
+                "n": 20,
+                "confidence": 0.9
+              },
+              "node_mean": 0.5158001946906248,
+              "reference_mean": 0.5140356481075286,
+              "verdict": "pass"
+            },
+            {
+              "node": "deployment",
+              "leakage": {
+                "value": 0.20500000000000007,
+                "low": 0.1499999999999999,
+                "high": 0.345,
+                "n": 20,
+                "confidence": 0.9
+              },
+              "node_mean": 0.4359962310642004,
+              "reference_mean": 0.39791618126134076,
+              "verdict": "fail"
+            }
+          ],
+          "end_to_end": {
+            "leakage": {
+              "value": 0.20500000000000007,
+              "low": 0.1499999999999999,
+              "high": 0.3500000000000001,
+              "n": 20,
+              "confidence": 0.9
+            },
+            "weakest_node": "main",
+            "credibility": 0.7949999999999999,
+            "mean_leakage": 0.10625000000000001,
+            "verdict": "fail"
+          }
+        }
+      }
+    },
+    "group_1": {
+      "configurations": {
+        "A": {
+          "nodes": [
+            {
+              "node": "gallery",
+              "leakage": {
+                "value": 1.0,
+                "low": 1.0,
+                "high": 1.0,
+                "n": 20,
+                "confidence": 0.9
+              },
+              "node_mean": 0.42567550862828896,
+              "reference_mean": -1.0,
+              "verdict": "fail"
+            },
+            {
+              "node": "main",
+              "leakage": {
+                "value": 0.41500000000000004,
+                "low": 0.29499999999999993,
+                "high": 0.5800000000000001,
+                "n": 20,
+                "confidence": 0.9
+              },
+              "node_mean": 0.43136127802232904,
+              "reference_mean": 0.34792762175202363,
+              "verdict": "fail"
+            },
+            {
+              "node": "student",
+              "leakage": {
+                "value": 0.06000000000000005,
+                "low": 0.004999999999999893,
+                "high": 0.15999999999999992,
+                "n": 20,
+                "confidence": 0.9
+              },
+              "node_mean": 0.4863606582085292,
+              "reference_mean": 0.47753201474746076,
+              "verdict": "uncertain"
+            },
+            {
+              "node": "deployment",
+              "leakage": {
+                "value": 0.41999999999999993,
+                "low": 0.31000000000000005,
+                "high": 0.5752499999999997,
+                "n": 20,
+                "confidence": 0.9
+              },
+              "node_mean": 0.43126839846372605,
+              "reference_mean": 0.347753989075621,
+              "verdict": "fail"
+            }
+          ],
+          "end_to_end": {
+            "leakage": {
+              "value": 1.0,
+              "low": 1.0,
+              "high": 1.0,
+              "n": 20,
+              "confidence": 0.9
+            },
+            "weakest_node": "gallery",
+            "credibility": 0.0,
+            "mean_leakage": 0.47375,
+            "verdict": "fail"
+          }
+        },
+        "B": {
+          "nodes": [
+            {
+              "node": "gallery",
+              "leakage": {
+                "value": 1.0,
+                "low": 1.0,
+                "high": 1.0,
+                "n": 20,
+                "confidence": 0.9
+              },
+              "node_mean": 0.42567550862828896,
+              "reference_mean": -1.0,
+              "verdict": "fail"
+            },
+            {
+              "node": "main",
+              "leakage": {
+                "value": 0.0,
+                "low": 0.0,
+                "high": 0.05499999999999994,
+                "n": 20,
+                "confidence": 0.9
+              },
+              "node_mean": 0.3433036201943954,
+              "reference_mean": 0.34792762175202363,
+              "verdict": "pass"
+            },
+            {
+              "node": "student",
+              "leakage": {
+                "value": 0.06000000000000005,
+                "low": 0.004999999999999893,
+                "high": 0.15999999999999992,
+                "n": 20,
+                "confidence": 0.9
+              },
+              "node_mean": 0.4863606582085292,
+              "reference_mean": 0.47753201474746076,
+              "verdict": "uncertain"
+            },
+            {
+              "node": "deployment",
+              "leakage": {
+                "value": 0.0,
+                "low": 0.0,
+                "high": 0.040000000000000036,
+                "n": 20,
+                "confidence": 0.9
+              },
+              "node_mean": 0.34336838275194165,
+              "reference_mean": 0.347753989075621,
+              "verdict": "pass"
+            }
+          ],
+          "end_to_end": {
+            "leakage": {
+              "value": 1.0,
+              "low": 1.0,
+              "high": 1.0,
+              "n": 20,
+              "confidence": 0.9
+            },
+            "weakest_node": "gallery",
+            "credibility": 0.0,
+            "mean_leakage": 0.265,
+            "verdict": "fail"
+          }
+        },
+        "C": {
+          "nodes": [
+            {
+              "node": "gallery",
+              "leakage": {
+                "value": 0.0,
+                "low": 0.0,
+                "high": 0.0,
+                "n": 20,
+                "confidence": 0.9
+              },
+              "node_mean": -1.0,
+              "reference_mean": -1.0,
+              "verdict": "pass"
+            },
+            {
+              "node": "main",
+              "leakage": {
+                "value": 0.3700000000000001,
+                "low": 0.29499999999999993,
+                "high": 0.5349999999999999,
+                "n": 20,
+                "confidence": 0.9
+              },
+              "node_mean": 0.42301138912638037,
+              "reference_mean": 0.34792762175202363,
+              "verdict": "fail"
+            },
+            {
+              "node": "student",
+              "leakage": {
+                "value": 0.18999999999999995,
+                "low": 0.09000000000000008,
+                "high": 0.33499999999999996,
+                "n": 20,
+                "confidence": 0.9
+              },
+              "node_mean": 0.5120337362090746,
+              "reference_mean": 0.47753201474746076,
+              "verdict": "uncertain"
+            },
+            {
+              "node": "deployment",
+              "leakage": {
+                "value": 0.3700000000000001,
+                "low": 0.29000000000000004,
+                "high": 0.5349999999999999,
+                "n": 20,
+                "confidence": 0.9
+              },
+              "node_mean": 0.4229867349068323,
+              "reference_mean": 0.347753989075621,
+              "verdict": "fail"
+            }
+          ],
+          "end_to_end": {
+            "leakage": {
+              "value": 0.3700000000000001,
+              "low": 0.30000000000000004,
+              "high": 0.5249999999999999,
+              "n": 20,
+              "confidence": 0.9
+            },
+            "weakest_node": "main",
+            "credibility": 0.6299999999999999,
+            "mean_leakage": 0.23250000000000004,
+            "verdict": "fail"
+          }
+        },
+        "D": {
+          "nodes": [
+            {
+              "node": "gallery",
+              "leakage": {
+                "value": 0.0,
+                "low": 0.0,
+                "high": 0.0,
+                "n": 20,
+                "confidence": 0.9
+              },
+              "node_mean": -1.0,
+              "reference_mean": -1.0,
+              "verdict": "pass"
+            },
+            {
+              "node": "main",
+              "leakage": {
+                "value": 0.0,
+                "low": 0.0,
+                "high": 0.050000000000000044,
+                "n": 20,
+                "confidence": 0.9
+              },
+              "node_mean": 0.3433036201943954,
+              "reference_mean": 0.34792762175202363,
+              "verdict": "pass"
+            },
+            {
+              "node": "student",
+              "leakage": {
+                "value": 0.0,
+                "low": 0.0,
+                "high": 0.02499999999999991,
+                "n": 20,
+                "confidence": 0.9
+              },
+              "node_mean": 0.46726778025428456,
+              "reference_mean": 0.47753201474746076,
+              "verdict": "pass"
+            },
+            {
+              "node": "deployment",
+              "leakage": {
+                "value": 0.0,
+                "low": 0.0,
+                "high": 0.04499999999999993,
+                "n": 20,
+                "confidence": 0.9
+              },
+              "node_mean": 0.34336838275194165,
+              "reference_mean": 0.347753989075621,
+              "verdict": "pass"
+            }
+          ],
+          "end_to_end": {
+            "leakage": {
+              "value": 0.0,
+              "low": 0.0,
+              "high": 0.06000000000000005,
+              "n": 20,
+              "confidence": 0.9
+            },
+            "weakest_node": "gallery",
+            "credibility": 1.0,
+            "mean_leakage": 0.0,
+            "verdict": "pass"
+          }
+        }
+      },
+      "trace_miss": {
+        "0": {
+          "nodes": [
+            {
+              "node": "gallery",
+              "leakage": {
+                "value": 0.0,
+                "low": 0.0,
+                "high": 0.0,
+                "n": 20,
+                "confidence": 0.9
+              },
+              "node_mean": -1.0,
+              "reference_mean": -1.0,
+              "verdict": "pass"
+            },
+            {
+              "node": "main",
+              "leakage": {
+                "value": 0.0,
+                "low": 0.0,
+                "high": 0.05499999999999994,
+                "n": 20,
+                "confidence": 0.9
+              },
+              "node_mean": 0.3433036201943954,
+              "reference_mean": 0.34792762175202363,
+              "verdict": "pass"
+            },
+            {
+              "node": "student",
+              "leakage": {
+                "value": 0.0,
+                "low": 0.0,
+                "high": 0.02499999999999991,
+                "n": 20,
+                "confidence": 0.9
+              },
+              "node_mean": 0.46726778025428456,
+              "reference_mean": 0.47753201474746076,
+              "verdict": "pass"
+            },
+            {
+              "node": "deployment",
+              "leakage": {
+                "value": 0.0,
+                "low": 0.0,
+                "high": 0.04499999999999993,
+                "n": 20,
+                "confidence": 0.9
+              },
+              "node_mean": 0.34336838275194165,
+              "reference_mean": 0.347753989075621,
+              "verdict": "pass"
+            }
+          ],
+          "end_to_end": {
+            "leakage": {
+              "value": 0.0,
+              "low": 0.0,
+              "high": 0.05499999999999994,
+              "n": 20,
+              "confidence": 0.9
+            },
+            "weakest_node": "gallery",
+            "credibility": 1.0,
+            "mean_leakage": 0.0,
+            "verdict": "pass"
+          }
+        },
+        "0.05": {
+          "nodes": [
+            {
+              "node": "gallery",
+              "leakage": {
+                "value": 0.0,
+                "low": 0.0,
+                "high": 0.0,
+                "n": 20,
+                "confidence": 0.9
+              },
+              "node_mean": -1.0,
+              "reference_mean": -1.0,
+              "verdict": "pass"
+            },
+            {
+              "node": "main",
+              "leakage": {
+                "value": 0.0,
+                "low": 0.0,
+                "high": 0.040000000000000036,
+                "n": 20,
+                "confidence": 0.9
+              },
+              "node_mean": 0.34361479977766674,
+              "reference_mean": 0.34792762175202363,
+              "verdict": "pass"
+            },
+            {
+              "node": "student",
+              "leakage": {
+                "value": 0.0,
+                "low": 0.0,
+                "high": 0.020000000000000018,
+                "n": 20,
+                "confidence": 0.9
+              },
+              "node_mean": 0.47187212109565735,
+              "reference_mean": 0.47753201474746076,
+              "verdict": "pass"
+            },
+            {
+              "node": "deployment",
+              "leakage": {
+                "value": 0.0,
+                "low": 0.0,
+                "high": 0.05499999999999994,
+                "n": 20,
+                "confidence": 0.9
+              },
+              "node_mean": 0.3439899252106746,
+              "reference_mean": 0.347753989075621,
+              "verdict": "pass"
+            }
+          ],
+          "end_to_end": {
+            "leakage": {
+              "value": 0.0,
+              "low": 0.0,
+              "high": 0.06000000000000005,
+              "n": 20,
+              "confidence": 0.9
+            },
+            "weakest_node": "gallery",
+            "credibility": 1.0,
+            "mean_leakage": 0.0,
+            "verdict": "pass"
+          }
+        },
+        "0.2": {
+          "nodes": [
+            {
+              "node": "gallery",
+              "leakage": {
+                "value": 0.0,
+                "low": 0.0,
+                "high": 0.0,
+                "n": 20,
+                "confidence": 0.9
+              },
+              "node_mean": -1.0,
+              "reference_mean": -1.0,
+              "verdict": "pass"
+            },
+            {
+              "node": "main",
+              "leakage": {
+                "value": 0.010000000000000009,
+                "low": 0.0,
+                "high": 0.1100000000000001,
+                "n": 20,
+                "confidence": 0.9
+              },
+              "node_mean": 0.3540294254819552,
+              "reference_mean": 0.34792762175202363,
+              "verdict": "uncertain"
+            },
+            {
+              "node": "student",
+              "leakage": {
+                "value": 0.010000000000000009,
+                "low": 0.0,
+                "high": 0.08499999999999996,
+                "n": 20,
+                "confidence": 0.9
+              },
+              "node_mean": 0.4750925170878569,
+              "reference_mean": 0.47753201474746076,
+              "verdict": "pass"
+            },
+            {
+              "node": "deployment",
+              "leakage": {
+                "value": 0.004999999999999893,
+                "low": 0.0,
+                "high": 0.1100000000000001,
+                "n": 20,
+                "confidence": 0.9
+              },
+              "node_mean": 0.35339341958363846,
+              "reference_mean": 0.347753989075621,
+              "verdict": "uncertain"
+            }
+          ],
+          "end_to_end": {
+            "leakage": {
+              "value": 0.010000000000000009,
+              "low": 0.0,
+              "high": 0.1200000000000001,
+              "n": 20,
+              "confidence": 0.9
+            },
+            "weakest_node": "main",
+            "credibility": 0.99,
+            "mean_leakage": 0.006249999999999978,
+            "verdict": "uncertain"
+          }
+        },
+        "0.4": {
+          "nodes": [
+            {
+              "node": "gallery",
+              "leakage": {
+                "value": 0.0,
+                "low": 0.0,
+                "high": 0.0,
+                "n": 20,
+                "confidence": 0.9
+              },
+              "node_mean": -1.0,
+              "reference_mean": -1.0,
+              "verdict": "pass"
+            },
+            {
+              "node": "main",
+              "leakage": {
+                "value": 0.135,
+                "low": 0.050000000000000044,
+                "high": 0.2649999999999999,
+                "n": 20,
+                "confidence": 0.9
+              },
+              "node_mean": 0.3726802171518405,
+              "reference_mean": 0.34792762175202363,
+              "verdict": "uncertain"
+            },
+            {
+              "node": "student",
+              "leakage": {
+                "value": 0.020000000000000018,
+                "low": 0.0,
+                "high": 0.11499999999999999,
+                "n": 20,
+                "confidence": 0.9
+              },
+              "node_mean": 0.4761352481941382,
+              "reference_mean": 0.47753201474746076,
+              "verdict": "uncertain"
+            },
+            {
+              "node": "deployment",
+              "leakage": {
+                "value": 0.1399999999999999,
+                "low": 0.040000000000000036,
+                "high": 0.2749999999999999,
+                "n": 20,
+                "confidence": 0.9
+              },
+              "node_mean": 0.37277682945132257,
+              "reference_mean": 0.347753989075621,
+              "verdict": "uncertain"
+            }
+          ],
+          "end_to_end": {
+            "leakage": {
+              "value": 0.1399999999999999,
+              "low": 0.06499999999999995,
+              "high": 0.2749999999999999,
+              "n": 20,
+              "confidence": 0.9
+            },
+            "weakest_node": "deployment",
+            "credibility": 0.8600000000000001,
+            "mean_leakage": 0.07374999999999998,
+            "verdict": "uncertain"
+          }
+        }
+      }
+    },
+    "group_2": {
+      "configurations": {
+        "A": {
+          "nodes": [
+            {
+              "node": "gallery",
+              "leakage": {
+                "value": 1.0,
+                "low": 1.0,
+                "high": 1.0,
+                "n": 20,
+                "confidence": 0.9
+              },
+              "node_mean": 0.5473455384373664,
+              "reference_mean": -1.0,
+              "verdict": "fail"
+            },
+            {
+              "node": "main",
+              "leakage": {
+                "value": 0.45999999999999996,
+                "low": 0.3600000000000001,
+                "high": 0.635,
+                "n": 20,
+                "confidence": 0.9
+              },
+              "node_mean": 0.5350278057157993,
+              "reference_mean": 0.44291153699159624,
+              "verdict": "fail"
+            },
+            {
+              "node": "student",
+              "leakage": {
+                "value": 0.014999999999999902,
+                "low": 0.0,
+                "high": 0.1100000000000001,
+                "n": 20,
+                "confidence": 0.9
+              },
+              "node_mean": 0.5622917945186297,
+              "reference_mean": 0.5632798328995705,
+              "verdict": "uncertain"
+            },
+            {
+              "node": "deployment",
+              "leakage": {
+                "value": 0.45999999999999996,
+                "low": 0.3500000000000001,
+                "high": 0.6299999999999999,
+                "n": 20,
+                "confidence": 0.9
+              },
+              "node_mean": 0.5350505958000819,
+              "reference_mean": 0.4430404422183831,
+              "verdict": "fail"
+            }
+          ],
+          "end_to_end": {
+            "leakage": {
+              "value": 1.0,
+              "low": 1.0,
+              "high": 1.0,
+              "n": 20,
+              "confidence": 0.9
+            },
+            "weakest_node": "gallery",
+            "credibility": 0.0,
+            "mean_leakage": 0.48374999999999996,
+            "verdict": "fail"
+          }
+        },
+        "B": {
+          "nodes": [
+            {
+              "node": "gallery",
+              "leakage": {
+                "value": 1.0,
+                "low": 1.0,
+                "high": 1.0,
+                "n": 20,
+                "confidence": 0.9
+              },
+              "node_mean": 0.5473455384373664,
+              "reference_mean": -1.0,
+              "verdict": "fail"
+            },
+            {
+              "node": "main",
+              "leakage": {
+                "value": 0.0,
+                "low": 0.0,
+                "high": 0.0,
+                "n": 20,
+                "confidence": 0.9
+              },
+              "node_mean": 0.43021838963031767,
+              "reference_mean": 0.44291153699159624,
+              "verdict": "pass"
+            },
+            {
+              "node": "student",
+              "leakage": {
+                "value": 0.014999999999999902,
+                "low": 0.0,
+                "high": 0.10499999999999998,
+                "n": 20,
+                "confidence": 0.9
+              },
+              "node_mean": 0.5622917945186297,
+              "reference_mean": 0.5632798328995705,
+              "verdict": "uncertain"
+            },
+            {
+              "node": "deployment",
+              "leakage": {
+                "value": 0.0,
+                "low": 0.0,
+                "high": 0.0,
+                "n": 20,
+                "confidence": 0.9
+              },
+              "node_mean": 0.4307077395419279,
+              "reference_mean": 0.4430404422183831,
+              "verdict": "pass"
+            }
+          ],
+          "end_to_end": {
+            "leakage": {
+              "value": 1.0,
+              "low": 1.0,
+              "high": 1.0,
+              "n": 20,
+              "confidence": 0.9
+            },
+            "weakest_node": "gallery",
+            "credibility": 0.0,
+            "mean_leakage": 0.25375,
+            "verdict": "fail"
+          }
+        },
+        "C": {
+          "nodes": [
+            {
+              "node": "gallery",
+              "leakage": {
+                "value": 0.0,
+                "low": 0.0,
+                "high": 0.0,
+                "n": 20,
+                "confidence": 0.9
+              },
+              "node_mean": -1.0,
+              "reference_mean": -1.0,
+              "verdict": "pass"
+            },
+            {
+              "node": "main",
+              "leakage": {
+                "value": 0.345,
+                "low": 0.24,
+                "high": 0.49,
+                "n": 20,
+                "confidence": 0.9
+              },
+              "node_mean": 0.5119240820407869,
+              "reference_mean": 0.44291153699159624,
+              "verdict": "fail"
+            },
+            {
+              "node": "student",
+              "leakage": {
+                "value": 0.0,
+                "low": 0.0,
+                "high": 0.07499999999999996,
+                "n": 20,
+                "confidence": 0.9
+              },
+              "node_mean": 0.5585930049419402,
+              "reference_mean": 0.5632798328995705,
+              "verdict": "pass"
+            },
+            {
+              "node": "deployment",
+              "leakage": {
+                "value": 0.345,
+                "low": 0.22999999999999998,
+                "high": 0.5049999999999999,
+                "n": 20,
+                "confidence": 0.9
+              },
+              "node_mean": 0.511556150019169,
+              "reference_mean": 0.4430404422183831,
+              "verdict": "fail"
+            }
+          ],
+          "end_to_end": {
+            "leakage": {
+              "value": 0.345,
+              "low": 0.2350000000000001,
+              "high": 0.5,
+              "n": 20,
+              "confidence": 0.9
+            },
+            "weakest_node": "main",
+            "credibility": 0.655,
+            "mean_leakage": 0.1725,
+            "verdict": "fail"
+          }
+        },
+        "D": {
+          "nodes": [
+            {
+              "node": "gallery",
+              "leakage": {
+                "value": 0.0,
+                "low": 0.0,
+                "high": 0.0,
+                "n": 20,
+                "confidence": 0.9
+              },
+              "node_mean": -1.0,
+              "reference_mean": -1.0,
+              "verdict": "pass"
+            },
+            {
+              "node": "main",
+              "leakage": {
+                "value": 0.0,
+                "low": 0.0,
+                "high": 0.0,
+                "n": 20,
+                "confidence": 0.9
+              },
+              "node_mean": 0.43021838963031767,
+              "reference_mean": 0.44291153699159624,
+              "verdict": "pass"
+            },
+            {
+              "node": "student",
+              "leakage": {
+                "value": 0.0,
+                "low": 0.0,
+                "high": 0.030000000000000027,
+                "n": 20,
+                "confidence": 0.9
+              },
+              "node_mean": 0.5576423421502114,
+              "reference_mean": 0.5632798328995705,
+              "verdict": "pass"
+            },
+            {
+              "node": "deployment",
+              "leakage": {
+                "value": 0.0,
+                "low": 0.0,
+                "high": 0.0,
+                "n": 20,
+                "confidence": 0.9
+              },
+              "node_mean": 0.4307077395419279,
+              "reference_mean": 0.4430404422183831,
+              "verdict": "pass"
+            }
+          ],
+          "end_to_end": {
+            "leakage": {
+              "value": 0.0,
+              "low": 0.0,
+              "high": 0.03499999999999992,
+              "n": 20,
+              "confidence": 0.9
+            },
+            "weakest_node": "gallery",
+            "credibility": 1.0,
+            "mean_leakage": 0.0,
+            "verdict": "pass"
+          }
+        }
+      },
+      "trace_miss": {
+        "0": {
+          "nodes": [
+            {
+              "node": "gallery",
+              "leakage": {
+                "value": 0.0,
+                "low": 0.0,
+                "high": 0.0,
+                "n": 20,
+                "confidence": 0.9
+              },
+              "node_mean": -1.0,
+              "reference_mean": -1.0,
+              "verdict": "pass"
+            },
+            {
+              "node": "main",
+              "leakage": {
+                "value": 0.0,
+                "low": 0.0,
+                "high": 0.0,
+                "n": 20,
+                "confidence": 0.9
+              },
+              "node_mean": 0.43021838963031767,
+              "reference_mean": 0.44291153699159624,
+              "verdict": "pass"
+            },
+            {
+              "node": "student",
+              "leakage": {
+                "value": 0.0,
+                "low": 0.0,
+                "high": 0.03499999999999992,
+                "n": 20,
+                "confidence": 0.9
+              },
+              "node_mean": 0.5576423421502114,
+              "reference_mean": 0.5632798328995705,
+              "verdict": "pass"
+            },
+            {
+              "node": "deployment",
+              "leakage": {
+                "value": 0.0,
+                "low": 0.0,
+                "high": 0.0,
+                "n": 20,
+                "confidence": 0.9
+              },
+              "node_mean": 0.4307077395419279,
+              "reference_mean": 0.4430404422183831,
+              "verdict": "pass"
+            }
+          ],
+          "end_to_end": {
+            "leakage": {
+              "value": 0.0,
+              "low": 0.0,
+              "high": 0.03499999999999992,
+              "n": 20,
+              "confidence": 0.9
+            },
+            "weakest_node": "gallery",
+            "credibility": 1.0,
+            "mean_leakage": 0.0,
+            "verdict": "pass"
+          }
+        },
+        "0.05": {
+          "nodes": [
+            {
+              "node": "gallery",
+              "leakage": {
+                "value": 0.0,
+                "low": 0.0,
+                "high": 0.0,
+                "n": 20,
+                "confidence": 0.9
+              },
+              "node_mean": -1.0,
+              "reference_mean": -1.0,
+              "verdict": "pass"
+            },
+            {
+              "node": "main",
+              "leakage": {
+                "value": 0.0,
+                "low": 0.0,
+                "high": 0.09000000000000008,
+                "n": 20,
+                "confidence": 0.9
+              },
+              "node_mean": 0.4364751546333233,
+              "reference_mean": 0.44291153699159624,
+              "verdict": "pass"
+            },
+            {
+              "node": "student",
+              "leakage": {
+                "value": 0.0,
+                "low": 0.0,
+                "high": 0.04524999999999971,
+                "n": 20,
+                "confidence": 0.9
+              },
+              "node_mean": 0.5595779562989871,
+              "reference_mean": 0.5632798328995705,
+              "verdict": "pass"
+            },
+            {
+              "node": "deployment",
+              "leakage": {
+                "value": 0.0,
+                "low": 0.0,
+                "high": 0.08499999999999996,
+                "n": 20,
+                "confidence": 0.9
+              },
+              "node_mean": 0.436372975135843,
+              "reference_mean": 0.4430404422183831,
+              "verdict": "pass"
+            }
+          ],
+          "end_to_end": {
+            "leakage": {
+              "value": 0.0,
+              "low": 0.0,
+              "high": 0.09499999999999997,
+              "n": 20,
+              "confidence": 0.9
+            },
+            "weakest_node": "gallery",
+            "credibility": 1.0,
+            "mean_leakage": 0.0,
+            "verdict": "pass"
+          }
+        },
+        "0.2": {
+          "nodes": [
+            {
+              "node": "gallery",
+              "leakage": {
+                "value": 0.0,
+                "low": 0.0,
+                "high": 0.0,
+                "n": 20,
+                "confidence": 0.9
+              },
+              "node_mean": -1.0,
+              "reference_mean": -1.0,
+              "verdict": "pass"
+            },
+            {
+              "node": "main",
+              "leakage": {
+                "value": 0.0,
+                "low": 0.0,
+                "high": 0.09524999999999975,
+                "n": 20,
+                "confidence": 0.9
+              },
+              "node_mean": 0.44208092850943415,
+              "reference_mean": 0.44291153699159624,
+              "verdict": "pass"
+            },
+            {
+              "node": "student",
+              "leakage": {
+                "value": 0.0,
+                "low": 0.0,
+                "high": 0.0,
+                "n": 20,
+                "confidence": 0.9
+              },
+              "node_mean": 0.5505117297172546,
+              "reference_mean": 0.5632798328995705,
+              "verdict": "pass"
+            },
+            {
+              "node": "deployment",
+              "leakage": {
+                "value": 0.0,
+                "low": 0.0,
+                "high": 0.10499999999999998,
+                "n": 20,
+                "confidence": 0.9
+              },
+              "node_mean": 0.44227891353269416,
+              "reference_mean": 0.4430404422183831,
+              "verdict": "uncertain"
+            }
+          ],
+          "end_to_end": {
+            "leakage": {
+              "value": 0.0,
+              "low": 0.0,
+              "high": 0.10000000000000009,
+              "n": 20,
+              "confidence": 0.9
+            },
+            "weakest_node": "gallery",
+            "credibility": 1.0,
+            "mean_leakage": 0.0,
+            "verdict": "uncertain"
+          }
+        },
+        "0.4": {
+          "nodes": [
+            {
+              "node": "gallery",
+              "leakage": {
+                "value": 0.0,
+                "low": 0.0,
+                "high": 0.0,
+                "n": 20,
+                "confidence": 0.9
+              },
+              "node_mean": -1.0,
+              "reference_mean": -1.0,
+              "verdict": "pass"
+            },
+            {
+              "node": "main",
+              "leakage": {
+                "value": 0.20999999999999996,
+                "low": 0.15500000000000003,
+                "high": 0.3400000000000001,
+                "n": 20,
+                "confidence": 0.9
+              },
+              "node_mean": 0.47748709221680957,
+              "reference_mean": 0.44291153699159624,
+              "verdict": "fail"
+            },
+            {
+              "node": "student",
+              "leakage": {
+                "value": 0.0,
+                "low": 0.0,
+                "high": 0.010000000000000009,
+                "n": 20,
+                "confidence": 0.9
+              },
+              "node_mean": 0.5504364132881163,
+              "reference_mean": 0.5632798328995705,
+              "verdict": "pass"
+            },
+            {
+              "node": "deployment",
+              "leakage": {
+                "value": 0.20500000000000007,
+                "low": 0.14500000000000002,
+                "high": 0.33499999999999996,
+                "n": 20,
+                "confidence": 0.9
+              },
+              "node_mean": 0.477434415370226,
+              "reference_mean": 0.4430404422183831,
+              "verdict": "fail"
+            }
+          ],
+          "end_to_end": {
+            "leakage": {
+              "value": 0.20999999999999996,
+              "low": 0.1499999999999999,
+              "high": 0.3400000000000001,
+              "n": 20,
+              "confidence": 0.9
+            },
+            "weakest_node": "main",
+            "credibility": 0.79,
+            "mean_leakage": 0.10375000000000001,
+            "verdict": "fail"
+          }
+        }
+      }
+    }
+  }
+}
