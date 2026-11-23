@@ -183,6 +183,7 @@ aiaa2290-Mini-Ever/
 │   └── smoke.json            # 合成数据冒烟配置（CPU、小网络，可直接运行）
 ├── docs/
 │   ├── overview.md           # 通俗版说明：设计、三环对应与预期结果
+│   ├── code_walkthrough.md   # 代码结构与冒烟测试结果讲解
 │   ├── protocol.md           # 对照、统计与可复现约定
 │   ├── roadmap.md            # 排期、最小可行版与展示映射
 │   ├── references.md         # 原方案参考文献与核验状态
