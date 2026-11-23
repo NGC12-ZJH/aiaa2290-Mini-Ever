@@ -1,7 +1,8 @@
-# 四组实验
+# 实验入口
 
 | 计划入口 | 实验 | 依赖 |
 | --- | --- | --- |
+| exp00_prior_familiarity | 起点模型是否事先认识遗忘组；含阳性对照 | ImageNet 起点、公开基础模型、固定身份抽样 |
 | exp01_traceability | 只删照片的逐节点测量；1b 账户删除与人物删除对比 | 两段式主模型、gallery、学生、人物/账户参照、产物版本清单 |
 | exp02_deletability | 单体与 SISA 顺序删除成本 | 按身份分片、重训与全链路更新 |
 | exp03_measurable_forgetting | 六种方法与 L1–L5 | 遗忘方法、影子模型、量化与重新学习 |
