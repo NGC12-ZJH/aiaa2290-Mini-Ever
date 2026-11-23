@@ -113,3 +113,17 @@ def test_canaries_only_on_forget_training_photos(ctx):
         assert record.role == TRAIN and record.identity in ctx.manifest.forget_groups[group]
         assert record.identity in forget
     assert set(plan.target_identities) <= set(ctx.manifest.public_identities)
+
+
+def test_canary_skipped_when_target_outside_label_space(ctx):
+    """SISA shards without the public pool cannot hold the (public) canary target."""
+    from mini_ever.data.splits import LabelSpace
+
+    plan = ctx.canary
+    image_id = next(iter(plan.stamped))
+    record = ctx.manifest.by_image_id[image_id]
+    users_only = LabelSpace(tuple(sorted(ctx.manifest.user_identities)))
+    _, label, _ = ctx.train_dataset([record], users_only)[0]
+    assert label == users_only.index(record.identity)
+    _, label, _ = ctx.train_dataset([record], ctx.labels2)[0]
+    assert label == ctx.labels2.index(plan.target_for(image_id))

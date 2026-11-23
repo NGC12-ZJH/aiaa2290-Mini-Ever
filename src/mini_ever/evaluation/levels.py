@@ -160,6 +160,10 @@ class LevelEvaluator:
         canary = self.ctx.canary
         if canary is None:
             return not_applicable("L5", "trigger_rate", "canaries disabled")
+        if hasattr(model, "shards") and not self.ctx.config.sisa.include_public_pool_in_shards:
+            return not_applicable(
+                "L5", "trigger_rate", "canary target is a public identity outside the SISA shards; never planted"
+            )
         trigger, target = canary.triggers[self.group_index], canary.target_identities[self.group_index]
         a = S.trigger_rates(self.ctx, model, self.identities, trigger, target)
         b = S.trigger_rates(self.ctx, reference, self.identities, trigger, target)

@@ -96,6 +96,7 @@ class FaceDataset(Dataset):
     canary:
         If given, photos listed in the plan are stamped with their group's
         trigger and relabelled as the group's target identity (training only).
+        Skipped when the target is not in ``labels``.
     force_trigger:
         If given, *every* photo is stamped with this trigger and keeps its true
         label (used to measure L5 trigger rates on audit photos).
@@ -127,9 +128,13 @@ class FaceDataset(Dataset):
 
         trigger = self.force_trigger
         if trigger is None and self.canary is not None:
-            trigger = self.canary.trigger_for(record.image_id)
-            if trigger is not None:
-                identity = self.canary.target_for(record.image_id)  # type: ignore[assignment]
+            target = self.canary.target_for(record.image_id)
+            # A canary is only planted where its (public) target identity is a
+            # class of this model. SISA shards without the public pool have no
+            # such class, so those photos train unstamped with their true label.
+            if target is not None and (self.labels is None or target in self.labels):
+                trigger = self.canary.trigger_for(record.image_id)
+                identity = target
         if trigger is not None:
             image = trigger.apply(image)
 
