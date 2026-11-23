@@ -1,7 +1,8 @@
-# Public summary results
+# 公开汇总结果
 
-| File | Contents |
+| 文件 | 内容 |
 | --- | --- |
-| `exp00_celeba_v1.json` | Experiment 0 (CelebA, config `celeba_v1`): per-group means, differences, 90% intervals and verdicts, with no identity ids |
+| `exp00_celeba_v1.json` | 实验 0（CelebA，配置 `celeba_v1`）：各组均值、差值、90% 区间与判定，不含身份编号 |
+| `exp01_celeba_v1.json` | 实验 1 与 1b：逐节点泄露、端到端泄露、账户删除对比人物删除、噪声底线、受影响产物计数 |
 
-Each result file records the code version, a config summary, the reference definition, number of repeats, intervals and limitations. Only aggregate statistics go here; no identity mappings or biometric features. PNG files are ignored by default; if one needs to be published, check it file by file and add it explicitly, or use an SVG/PDF chart instead.
+每份结果记录代码版本、配置摘要、参照定义、重复次数、区间和局限。只放汇总统计，不放身份映射和生物特征。PNG 默认被忽略，如需发布应逐文件检查后显式添加，或使用 SVG/PDF 图表。
