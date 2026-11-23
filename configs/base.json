@@ -1,0 +1,46 @@
+{
+  "status": "planning_only",
+  "project": "aiaa2290-Mini-Ever",
+  "data": {
+    "dataset": "CelebA",
+    "local_root": "data/celeba",
+    "min_images_per_identity": 25,
+    "target_identities": 1000,
+    "split_ratios": {"train": 0.7, "gallery": 0.1, "test": 0.2},
+    "forget_identities_per_group": 20,
+    "forget_group_count": null,
+    "split_seed": null,
+    "training_seeds": []
+  },
+  "model": {
+    "backbone": "resnet50",
+    "initialization": "imagenet_pretrained",
+    "input_size": [112, 112],
+    "embedding_dim": 512,
+    "loss": "arcface"
+  },
+  "training": {
+    "epochs": null,
+    "optimizer": null,
+    "learning_rate": null,
+    "batch_size": null,
+    "scheduler": "cosine",
+    "amp": true
+  },
+  "sisa": {
+    "shard_counts": [4, 8, 16],
+    "partition_unit": "identity",
+    "backbone": "resnet18",
+    "embedding_aggregation": "concatenate_normalized",
+    "slicing_enabled": false
+  },
+  "evaluation": {
+    "reference": "matched_never_trained",
+    "quantization_bits": [8, 4],
+    "relearning_images_per_forget_identity": 5,
+    "relearning_steps": 50,
+    "shadow_model_count": null,
+    "equivalence_margins": null,
+    "confidence_level": null
+  }
+}
