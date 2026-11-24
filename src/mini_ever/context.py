@@ -19,6 +19,8 @@ from __future__ import annotations
 
 import platform
 import subprocess
+import weakref
+from collections import OrderedDict
 from collections.abc import Callable, Iterable, Sequence
 from dataclasses import asdict
 from datetime import datetime, timezone
@@ -56,6 +58,10 @@ from mini_ever.utils.io import read_json, write_json
 from mini_ever.utils.seeding import derive_seed
 
 
+# How many models the in-memory cache keeps (each ResNet-50 is ~100 MB on the GPU).
+MEMORY_MODELS = 16
+
+
 class Context:
     def __init__(
         self,
@@ -84,8 +90,12 @@ class Context:
         self.labels2: LabelSpace = manifest.stage2_labels()
         self.train_transforms = build_transforms(config.model.input_size, train=True, crop_box=crop_box)
         self.eval_transforms = build_transforms(config.model.input_size, train=False, crop_box=crop_box)
-        self._models: dict[str, nn.Module] = {}
-        self._artifact_of: dict[int, str] = {}
+        # Recently used models stay in (GPU) memory; older ones are dropped and
+        # reloaded from disk on demand, so long runs (exp03 shadows) do not
+        # exhaust GPU memory. ``_artifact_of`` holds a weak reference next to
+        # each id so a recycled ``id()`` never maps a new model to an old artifact.
+        self._models: OrderedDict[str, nn.Module] = OrderedDict()
+        self._artifact_of: dict[int, tuple[weakref.ref, str]] = {}
         self._embeddings: dict[tuple[str, str], np.ndarray] = {}
         self._train_seconds: dict[str, float] = {}
 
@@ -175,7 +185,19 @@ class Context:
     # ------------------------------------------------------------------ #
 
     def artifact_id(self, model: nn.Module) -> str | None:
-        return self._artifact_of.get(id(model))
+        entry = self._artifact_of.get(id(model))
+        if entry is None or entry[0]() is not model:
+            return None
+        return entry[1]
+
+    def _remember(self, artifact_id: str, model: nn.Module, keep: bool = True) -> None:
+        self._artifact_of[id(model)] = (weakref.ref(model), artifact_id)
+        if not keep:
+            return
+        self._models[artifact_id] = model
+        self._models.move_to_end(artifact_id)
+        while len(self._models) > MEMORY_MODELS:
+            self._models.popitem(last=False)
 
     def _cache_key(self, parts: dict[str, Any]) -> str:
         base = {
@@ -202,6 +224,7 @@ class Context:
         """
         artifact_id = f"{name}-{self._cache_key(parts)}"
         if artifact_id in self._models:
+            self._models.move_to_end(artifact_id)
             return self._models[artifact_id]
         path = self.runs_dir / "models" / f"{artifact_id}.pt"
         model = factory()
@@ -216,8 +239,7 @@ class Context:
             write_json(path.with_suffix(".json"), {"artifact_id": artifact_id, "parts": parts, "train_report": report})
             register(artifact_id, model)
             self._train_seconds[artifact_id] = float(report.seconds)
-        self._models[artifact_id] = model
-        self._artifact_of[id(model)] = artifact_id
+        self._remember(artifact_id, model)
         return model
 
     def train_seconds(self, model: nn.Module) -> float:
@@ -244,7 +266,7 @@ class Context:
             backbone or self.config.model.backbone, self.config.model.embedding_dim, self.config.model.initialization
         )
         model = FeatureExtractor(net).to(self.device).eval()
-        self._artifact_of[id(model)] = f"init-{backbone or self.config.model.backbone}"
+        self._remember(f"init-{backbone or self.config.model.backbone}", model, keep=False)
         return model
 
     def public_base(self, backbone: str | None = None) -> FaceModel:
@@ -318,8 +340,7 @@ class Context:
     def adopt(self, model: nn.Module, artifact_id: str, kind: str, parents: Iterable[str], notes: str = "") -> None:
         """Register a model built outside the cache (unlearned or quantised copies)."""
         parent_ids = tuple(parents)
-        self._artifact_of[id(model)] = artifact_id
-        self._models[artifact_id] = model
+        self._remember(artifact_id, model)
         self.registry.register(
             artifact_id,
             kind,

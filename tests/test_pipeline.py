@@ -22,6 +22,27 @@ def test_models_are_cached_and_label_spaces_match(ctx):
     assert ctx.artifact_id(main) != ctx.artifact_id(ref)
 
 
+
+def test_memory_cache_is_bounded_and_reloads_from_disk(ctx, monkeypatch):
+    import torch
+
+    from mini_ever import context as context_module
+
+    monkeypatch.setattr(context_module, "MEMORY_MODELS", 1)
+    ctx._models.clear()  # the shared fixture may already hold these models
+    main = ctx.main_model(1)
+    ref = ctx.person_reference(ctx.manifest.forget_groups[0], 1)
+    assert len(ctx._models) == 1
+    # Evicted models that are still referenced keep their identity...
+    assert ctx.artifact_id(main) is not None and ctx.artifact_id(ref) is not None
+    # ...and a fresh request reloads the same weights from disk.
+    reloaded = ctx.main_model(1)
+    assert ctx.artifact_id(reloaded) == ctx.artifact_id(main)
+    for a, b in zip(main.state_dict().values(), reloaded.state_dict().values()):
+        assert torch.equal(a.cpu(), b.cpu())
+    # A model the context never built has no artifact id.
+    assert ctx.artifact_id(torch.nn.Linear(2, 2)) is None
+
 def test_training_learns_something(ctx):
     model = ctx.main_model(1)
     remaining = [i for i in ctx.manifest.user_identities if i not in ctx.manifest.forget_union]
