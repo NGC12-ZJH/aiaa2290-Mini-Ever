@@ -348,4 +348,8 @@ python3 -m mini_ever run exp03 --config configs/celeba_v1.json --groups 0 --seed
 python3 -m mini_ever run exp03 --config configs/celeba_v1.json
 ```
 
-模型按“数据 + 模型 + 训练配置 + 删除集合 + 种子”缓存，评估配置不进缓存键，所以精简版和冻结版共用主模型、参照和重训模型。精简版里输出过滤第 0 组种子 1 的 L4 面积（0.7233）和单独诊断算出的曲线面积完全一致，NegGrad+ 第 0 组种子 1 的 L1（0.663）、L4（+0.186）在精简版和抽查里也完全一致，可以作为一致性检查。删除前识别率和重新学习曲线是只读诊断，脚本不在仓库里，数字见 `exp03_celeba_v1_diagnostics.json`。
+模型按“数据 + 模型 + 训练配置 + 删除集合 + 种子”缓存，评估配置不进缓存键，所以精简版和冻结版共用主模型、参照和重训模型。精简版里输出过滤第 0 组种子 1 的 L4 面积（0.7233）和单独诊断算出的曲线面积完全一致，NegGrad+ 第 0 组种子 1 的 L1（0.663）、L4（+0.186）在精简版和抽查里也完全一致，可以作为一致性检查。删除前识别率和重新学习曲线是只读诊断（只读缓存，不写任何文件），数字见 `exp03_celeba_v1_diagnostics.json`。复现：
+
+```bash
+PYTHONPATH=src python3 scripts/exp03_diagnostics.py --config configs/celeba_v1_exp03_lite.json
+```

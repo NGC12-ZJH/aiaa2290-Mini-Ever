@@ -6,6 +6,7 @@
 | `download_celeba_mirror.sh` | 从 hf-mirror 的 `flwrlabs/celeba` 并行下载 25 个 parquet 分片，并按 LFS 哈希校验 |
 | `convert_celeba_parquet.py` | 把 parquet 分片转成 `data/celeba/img_align_celeba/` 与 `identity_CelebA.txt`（需另装 pyarrow） |
 | `make_calib_configs.py` | 由 `configs/calib.json` 生成阶段 1 校准用的学习率与 ArcFace 参数变体 |
+| `exp03_diagnostics.py` | 实验 3 只读诊断：删除前主模型对各遗忘组的识别率、L4 重新学习曲线（原权重对参照），见 docs/exp03_analysis.md |
 | `check_stage1_convergence.py` | 报告公开基础模型在公开池训练照片上的准确率，用于检查收敛；不看 exp00 阳性对照 |
 
 CelebA 准备与校准的完整过程见 [docs/exp00_analysis.md](../docs/exp00_analysis.md)。
