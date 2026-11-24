@@ -1,0 +1,147 @@
+{
+ "experiment": "exp03_measurable_forgetting (diagnostics)",
+ "meta": {
+  "date": "2026-11-24",
+  "git_commit": "11795a28b0b65e4b9f7eaa974b42ca7e18889df7",
+  "server_patches": [
+   "ddae3ba",
+   "2737abe"
+  ],
+  "config": "configs/celeba_v1_exp03_lite.json",
+  "manifest_sha256": "904b9a8214ce8f79e3448c9a6c6ab30a675eb14f24c93c4416a28a3759edca22",
+  "note": "read-only diagnostics computed from the cached models of the exp03 lite run; not part of the frozen protocol"
+ },
+ "original_model_classifier_accuracy_on_audit_photos": {
+  "description": "main model (before any deletion), mean over the 20 people of each forget group; key g<group>_s<training seed>",
+  "values": {
+   "g0_s1": 0.7733333333333334,
+   "g1_s1": 0.6633333333333333,
+   "g2_s1": 0.7816666666666667,
+   "g0_s2": 0.7733333333333332,
+   "g1_s2": 0.6683333333333333,
+   "g2_s2": 0.7833333333333334,
+   "g0_s3": 0.7883333333333333,
+   "g1_s3": 0.6499999999999999,
+   "g2_s3": 0.7416666666666667
+  }
+ },
+ "relearn_curves_seed1": {
+  "description": "L4 relearning curves, training seed 1: mean accuracy over the 20 people at steps 0,10,...,50. original_weights = main model with no filter (what the output filter hides); reference = person reference",
+  "values": {
+   "g0_original_weights": {
+    "steps": [
+     0,
+     10,
+     20,
+     30,
+     40,
+     50
+    ],
+    "mean_accuracy": [
+     0.7733333333333334,
+     0.7466666666666667,
+     0.705,
+     0.705,
+     0.705,
+     0.705
+    ],
+    "area": 0.7233333333333333
+   },
+   "g0_reference": {
+    "steps": [
+     0,
+     10,
+     20,
+     30,
+     40,
+     50
+    ],
+    "mean_accuracy": [
+     0.0,
+     0.4683333333333334,
+     0.6216666666666667,
+     0.6716666666666667,
+     0.68,
+     0.6883333333333334
+    ],
+    "area": 0.5216666666666667
+   },
+   "g1_original_weights": {
+    "steps": [
+     0,
+     10,
+     20,
+     30,
+     40,
+     50
+    ],
+    "mean_accuracy": [
+     0.6633333333333333,
+     0.5933333333333335,
+     0.5733333333333335,
+     0.5566666666666668,
+     0.5566666666666668,
+     0.5566666666666668
+    ],
+    "area": 0.5833333333333334
+   },
+   "g1_reference": {
+    "steps": [
+     0,
+     10,
+     20,
+     30,
+     40,
+     50
+    ],
+    "mean_accuracy": [
+     0.0,
+     0.3466666666666666,
+     0.4833333333333333,
+     0.4916666666666666,
+     0.4916666666666666,
+     0.5
+    ],
+    "area": 0.3855555555555555
+   },
+   "g2_original_weights": {
+    "steps": [
+     0,
+     10,
+     20,
+     30,
+     40,
+     50
+    ],
+    "mean_accuracy": [
+     0.7816666666666667,
+     0.7733333333333334,
+     0.7816666666666668,
+     0.7816666666666668,
+     0.7816666666666668,
+     0.775
+    ],
+    "area": 0.7791666666666668
+   },
+   "g2_reference": {
+    "steps": [
+     0,
+     10,
+     20,
+     30,
+     40,
+     50
+    ],
+    "mean_accuracy": [
+     0.0,
+     0.5216666666666667,
+     0.665,
+     0.6900000000000002,
+     0.7066666666666668,
+     0.7066666666666668
+    ],
+    "area": 0.5483333333333335
+   }
+  }
+ }
+}

@@ -1,0 +1,166 @@
+{
+  "meta": {
+    "timestamp": "2026-11-24T08:08:37+00:00",
+    "git_commit": "11795a28b0b65e4b9f7eaa974b42ca7e18889df7",
+    "config_sha256": "9d1bbe65cd11dc2f2645ba69fccf0d09130189f173e1cc9c461492766f2caf0f",
+    "manifest_sha256": "904b9a8214ce8f79e3448c9a6c6ab30a675eb14f24c93c4416a28a3759edca22",
+    "canary_sha256": "dc4bb94789a025849306b53a2d6b2e3675eec0d0df0e02059ea03c90eb2dff0f",
+    "training_seeds": [
+      1,
+      2,
+      3
+    ],
+    "device": "cuda",
+    "torch": "2.11.0+cu128",
+    "python": "3.10.12"
+  },
+  "experiment": "exp03_measurable_forgetting",
+  "methods": [
+    "neggrad_plus"
+  ],
+  "runs": [
+    {
+      "group": 0,
+      "seed_index": 0,
+      "method": "neggrad_plus",
+      "exact": false,
+      "update_seconds": 59.369655828006216,
+      "notes": "",
+      "levels": [
+        {
+          "level": "L1",
+          "metric": "classifier_accuracy_on_audit_photos",
+          "method_value": 0.6633333333333333,
+          "reference_value": 0.0,
+          "estimate": {
+            "value": 0.6633333333333333,
+            "low": 0.555,
+            "high": 0.7733333333333333,
+            "n": 20,
+            "confidence": 0.9
+          },
+          "verdict": "fail",
+          "exploratory": false,
+          "note": ""
+        },
+        {
+          "level": "L2",
+          "metric": "ulira_auc_minus_0.5",
+          "method_value": 0.9515912763954748,
+          "reference_value": 0.5,
+          "estimate": {
+            "value": 0.4515912763954748,
+            "low": 0.4444399721245434,
+            "high": 0.457891572650825,
+            "n": 411,
+            "confidence": 0.9
+          },
+          "verdict": "fail",
+          "exploratory": false,
+          "note": "seed-based shadow models (data fixed by the manifest); accuracy=0.874; examples resampled (not identities)"
+        },
+        {
+          "level": "L3-INT8/L1",
+          "metric": "classifier_accuracy_on_audit_photos",
+          "method_value": 0.655,
+          "reference_value": 0.0,
+          "estimate": {
+            "value": 0.655,
+            "low": 0.545,
+            "high": 0.7716666666666667,
+            "n": 20,
+            "confidence": 0.9
+          },
+          "verdict": "fail",
+          "exploratory": false,
+          "note": ""
+        },
+        {
+          "level": "L3-INT8/L2",
+          "metric": "prototype_score_advantage",
+          "method_value": 0.49802548736333846,
+          "reference_value": 0.40321506150066855,
+          "estimate": {
+            "value": 0.4850000000000001,
+            "low": 0.33499999999999996,
+            "high": 0.685,
+            "n": 20,
+            "confidence": 0.9
+          },
+          "verdict": "fail",
+          "exploratory": true,
+          "note": "simplified baseline, not U-LiRA"
+        },
+        {
+          "level": "L3-INT4/L1",
+          "metric": "classifier_accuracy_on_audit_photos",
+          "method_value": 0.5783333333333334,
+          "reference_value": 0.0,
+          "estimate": {
+            "value": 0.5783333333333334,
+            "low": 0.45166666666666666,
+            "high": 0.6984166666666667,
+            "n": 20,
+            "confidence": 0.9
+          },
+          "verdict": "fail",
+          "exploratory": false,
+          "note": ""
+        },
+        {
+          "level": "L3-INT4/L2",
+          "metric": "prototype_score_advantage",
+          "method_value": 0.4945181757211685,
+          "reference_value": 0.4313549481332302,
+          "estimate": {
+            "value": 0.3500000000000001,
+            "low": 0.22474999999999995,
+            "high": 0.52,
+            "n": 20,
+            "confidence": 0.9
+          },
+          "verdict": "fail",
+          "exploratory": true,
+          "note": "simplified baseline, not U-LiRA"
+        },
+        {
+          "level": "L4",
+          "metric": "relearn_curve_area",
+          "method_value": 0.7077777777777777,
+          "reference_value": 0.5216666666666667,
+          "estimate": {
+            "value": 0.1861111111111111,
+            "low": 0.13748611111111106,
+            "high": 0.23251388888888885,
+            "n": 20,
+            "confidence": 0.9
+          },
+          "verdict": "fail",
+          "exploratory": false,
+          "note": ""
+        },
+        {
+          "level": "L5",
+          "metric": "trigger_rate",
+          "method_value": 0.0,
+          "reference_value": 0.0,
+          "estimate": {
+            "value": 0.0,
+            "low": 0.0,
+            "high": 0.0,
+            "n": 20,
+            "confidence": 0.9
+          },
+          "verdict": "pass",
+          "exploratory": false,
+          "note": ""
+        }
+      ],
+      "utility": {
+        "closed_set_top1_all": 0.5862857142857142,
+        "closed_set_top1_remaining_users": 0.5818390804597702,
+        "lfw": "n/a (LFW not available locally)"
+      }
+    }
+  ]
+}
