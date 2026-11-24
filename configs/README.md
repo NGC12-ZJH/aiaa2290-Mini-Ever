@@ -6,6 +6,7 @@
 | `smoke.json` | 合成数据冒烟配置，参数已全部填写，可直接运行 |
 | `celeba_v1.json` | **正式实验配置，2026-11-24 冻结，不再修改**（配置哈希 `9d1bbe65…`）。取值依据见 [docs/exp00_analysis.md](../docs/exp00_analysis.md) |
 | `calib.json` | 校准用临时配置：数据段与 `celeba_v1` 相同，轮数为 1，输出写到 `runs/calib/`。只用于计时，不产出结果 |
+| `celeba_v1_exp03_lite.json` | 实验 3 简化版（2026-11-24，为赶 pre 时间）：与 `celeba_v1` 只差 `evaluation.shadow_model_count = 0`，L2 改用简化基线（非 U-LiRA）。数据、模型、训练段不变，缓存照常复用。U-LiRA 另用 `celeba_v1` 对第 0 组、种子 1、NegGrad+ 做一次抽查 |
 
 ```bash
 python -m mini_ever check-config --config configs/base.json   # 列出仍未确定的字段
