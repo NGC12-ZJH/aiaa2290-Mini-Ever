@@ -7,6 +7,7 @@
 | `exp02_celeba_v1.json` | 实验 2：单体模型与 SISA S1/4/8/16 的单次删除 GPU 秒数、全链路成本（学生、特征库、手机版）、删除前后的 1:N top-1 |
 | `exp03_celeba_v1_lite.json` | 实验 3（配置 `celeba_v1_exp03_lite`，L2 用简化基线而非 U-LiRA）：6 种方法 × 3 组 × 3 种子的 L1–L5 估计值、区间与判定，更新耗时与 1:N top-1 |
 | `exp03_celeba_v1_ulira_spotcheck.json` | 实验 3 U-LiRA 抽查（冻结配置 `celeba_v1`，8 对影子模型）：NegGrad+、第 0 组、种子 1 |
+| `exp03_celeba_v1_ulira_retrain_control.json` | 实验 3 U-LiRA 对照（冻结配置 `celeba_v1`，8 对影子模型）：全量重训、第 0 组、种子 1，检验攻击的误报率 |
 | `exp03_celeba_v1_diagnostics.json` | 实验 3 只读诊断：删除前主模型对各遗忘组的识别率、种子 1 的 L4 重新学习曲线（原权重对参照） |
 | `exp04_celeba_v1.json` | 实验 4 与 4b：配置 A–D 的逐节点泄露、端到端泄露（最大值）与平均值对照、漏追踪比例 0/5%/20%/40% 的曲线 |
 

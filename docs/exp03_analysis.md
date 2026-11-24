@@ -1,9 +1,9 @@
 # 实验 3 分析：M 环，一次测试通过不算证明
 
-> 在 CelebA 上的正式运行，2026-11-24，RTX 4090。精简版墙钟时间 1 小时 48 分钟，U-LiRA 抽查 12 分钟。
-> 原始结果（只有汇总统计）：[results/public/exp03_celeba_v1_lite.json](../results/public/exp03_celeba_v1_lite.json)（主结果）、[exp03_celeba_v1_ulira_spotcheck.json](../results/public/exp03_celeba_v1_ulira_spotcheck.json)（U-LiRA 抽查）、[exp03_celeba_v1_diagnostics.json](../results/public/exp03_celeba_v1_diagnostics.json)（删除前识别率、重新学习曲线）。
+> 在 CelebA 上的正式运行，2026-11-24，RTX 4090。精简版墙钟时间 1 小时 48 分钟，U-LiRA 抽查 12 分钟，U-LiRA 对照 2 分钟。
+> 原始结果（只有汇总统计）：[results/public/exp03_celeba_v1_lite.json](../results/public/exp03_celeba_v1_lite.json)（主结果）、[exp03_celeba_v1_ulira_spotcheck.json](../results/public/exp03_celeba_v1_ulira_spotcheck.json)（U-LiRA 抽查）、[exp03_celeba_v1_ulira_retrain_control.json](../results/public/exp03_celeba_v1_ulira_retrain_control.json)（U-LiRA 对照）、[exp03_celeba_v1_diagnostics.json](../results/public/exp03_celeba_v1_diagnostics.json)（删除前识别率、重新学习曲线）。
 > 运行记录：代码 commit `11795a2` + 补丁 `ddae3ba`（金丝雀 × SISA 修复）和 `2737abe`（模型缓存上限，修复显存溢出）。两个补丁以未提交改动的形式打在服务器上，结果文件里只记录了 `11795a2`。划分哈希 `904b9a82…`，3 个训练种子。
-> **配置偏离**：主结果用的是 [configs/celeba_v1_exp03_lite.json](../configs/celeba_v1_exp03_lite.json)（哈希 `5f04e6de…`），和冻结配置 `celeba_v1`（`9d1bbe65…`）只差一处：`shadow_model_count` 从 8 改为 0，所以 L2 用简化基线，不是 U-LiRA。原因是赶 11 月 30 日的 pre：完整版每个格子要多训 16 个影子模型，按当时速度要再跑一天以上，已在下午 2 点停掉。作为补偿，用冻结配置对 1 个格子（NegGrad+、第 0 组、种子 1）跑了完整的 U-LiRA。
+> **配置偏离**：主结果用的是 [configs/celeba_v1_exp03_lite.json](../configs/celeba_v1_exp03_lite.json)（哈希 `5f04e6de…`），和冻结配置 `celeba_v1`（`9d1bbe65…`）只差一处：`shadow_model_count` 从 8 改为 0，所以 L2 用简化基线，不是 U-LiRA。原因是赶 11 月 30 日的 pre：完整版每个格子要多训 16 个影子模型，按当时速度要再跑一天以上，已在下午 2 点停掉。作为补偿，用冻结配置对第 0 组、种子 1 跑了两个格子的完整 U-LiRA：NegGrad+（抽查），和全量重训（对照，检验攻击会不会误报）。
 
 **一句话结论：只屏蔽名字的“输出过滤”在 L1 上和“从没见过”完全一样（都是 0%），但其余每一关都失败：去掉过滤，权重仍认得 74% 的人；预埋的暗号 100% 触发。三种近似遗忘方法（微调、NegGrad+、SCRUB）在事先冻结的参数下，连 L1 都没过：删除后仍能叫出 62%–66% 的人的名字，只忘掉了约 10%–16%。其中 NegGrad+ 和 SCRUB 让暗号完全失效，单看 L5 会以为删干净了。只有两种重训方法每一关都接近参照。压缩（INT8、INT4）既没有让记忆回来，也没有让它消失。** 这是 pre 第 7 页“One passed test is not proof”的实测版本：**两种走捷径的方法各过了一关，过的还不是同一关。**
 
@@ -136,17 +136,20 @@ pre 第 7 页讲 M 环：**删除之后，能不能证明真的忘了？** 讲�
 - **输出过滤的 0.44 和实验 1 的主模型（0.42–0.50）一致**：参数没动，特征当然也没动。这再次说明，L1 的 0% 只是输出被挡住了。
 - 三种近似方法比输出过滤只低了 0.05–0.10，降幅约 11%–23%。
 
-**U-LiRA 抽查**（冻结配置，NegGrad+、第 0 组、种子 1，8 对影子模型）：
+**U-LiRA 抽查与对照**（冻结配置，第 0 组、种子 1，每个格子 8 对影子模型）：
 
-| 指标 | 数值 |
-|---|---|
-| U-LiRA AUC | **0.952**（AUC − 0.5 = 0.452，区间 0.444 至 0.458） |
-| 判定 | **失败**（界值 ±0.05） |
-| 成员判断准确率 | 0.874 |
-| 用于攻击的被删训练照 | 411 张 |
+| 指标 | NegGrad+（抽查） | 全量重训（对照） |
+|---|---|---|
+| U-LiRA AUC | **0.952** | **0.509** |
+| AUC − 0.5（90% 区间） | 0.452（0.444 至 0.458） | 0.009（−0.008 至 0.025） |
+| 判定（界值 ±0.05） | **失败** | **通过** |
+| 成员判断准确率 | 0.874 | 0.510 |
+| 用于攻击的被删训练照 | 411 张 | 411 张（同一批） |
 
+- **对照说明攻击不会乱报**：同样的攻击、同样的 411 张照片，换成真正重训过的模型，AUC 是 0.509，成员判断准确率 0.51，和抛硬币一样。所以 NegGrad+ 的 0.95 不是“这个攻击对什么模型都喊失败”，而是 NegGrad+ 真的留下了可被识别的痕迹。
+  - 要注意，这个对照通过在一定程度上是**设计决定的**：全量重训的“删除后影子”本身就是“从没见过”的重训模型，只是种子不同，两组影子来自同一个分布。所以它检验的是**攻击的误报率**，不是“重训很神奇”。这正是阴性对照该做的事。
 - **完整的成员推断攻击给出的结论和精简版相同，而且更强**：对 411 张被删的训练照，攻击者有 87% 的把握判断“这张照片被训练过、又被 NegGrad+ 删过”，而不是“从没被训练过”。
-- 同一个格子在精简版里的泄露是 0.50。两种量法方向一致，可以作为精简版可信的佐证。但只有 1 个格子，不能替代 54 个格子的完整 U-LiRA（见局限第 1 条）。
+- 同一个格子在精简版里的泄露是 0.50。两种量法方向一致，可以作为精简版可信的佐证。但只有 2 个格子，不能替代 54 个格子的完整 U-LiRA（见局限第 1 条）。
 - 区间很窄，是因为按照片重抽样（411 张），不包括“换一批影子模型”的波动。
 
 ### 4. L3：压缩既没让记忆回来，也没让它消失
@@ -257,7 +260,7 @@ pre 第 7 页讲 M 环：**删除之后，能不能证明真的忘了？** 讲�
 
 ## 四、局限
 
-1. **L2 主结果不是 U-LiRA**：为了赶 pre，54 个格子的 L2 用的是简化基线（和实验 1 相同的诊断量）。冻结配置的 U-LiRA 只跑了 1 个格子（NegGrad+、第 0 组、种子 1），结论一致（AUC 0.95），但不能推广成“所有格子的 U-LiRA 都失败”。重训类方法的 U-LiRA 没有测，它们的 L2 通过只是简化基线上的结论。
+1. **L2 主结果不是 U-LiRA**：为了赶 pre，54 个格子的 L2 用的是简化基线（和实验 1 相同的诊断量）。冻结配置的 U-LiRA 只跑了 2 个格子（第 0 组、种子 1）：NegGrad+ 失败（AUC 0.95），全量重训通过（AUC 0.51），和简化基线的结论一致，但不能推广到所有格子。微调、SCRUB、输出过滤和 SISA 的 U-LiRA 没有测，SISA 和其余格子的 L2 只是简化基线上的结论。
 2. **U-LiRA 的区间偏窄**：按照片重抽样，不包括影子模型本身的波动，也不按人重抽样。
 3. **近似方法只用了一组冻结参数**：没有为了“忘得更多”去调。更激进的设置（更多轮、更大的遗忘权重）可能忘得更多，但通常也会伤效用。所以结论是“在这组事先固定的参数下，近似方法没忘干净”，不是“近似遗忘不可能有效”。更重要的是：**没有和参照比较的测试，谁也不知道这组参数够不够。**
 4. **L4 在这个设置下主要测的是起点**：参照每人 5 张照片、30 步就能接近原权重的水平，曲线面积的差距几乎全来自前 10–20 步。对“本来就没忘”的方法，L4 和 L1 给出的是同一个信息，没能检验“忘了之后学得更快”。
@@ -313,7 +316,7 @@ pre 第 7 页讲 M 环：**删除之后，能不能证明真的忘了？** 讲�
 - **问：“近似方法是不是参数没调好？”**
   答：“Possibly — we fixed the settings in advance and didn’t tune them to look good or bad. But that is exactly the point: without a comparison against a never-trained model, nobody would know whether the setting was enough. And here, exact retraining cost less than twice as much.”
 - **问：“L2 用的不是真正的成员推断攻击？”**
-  答：“For the full grid we used a simpler similarity test. We ran the full U-LiRA attack on one case, NegGrad+ on one group: the attacker could tell a trained-then-deleted photo from a never-trained one with AUC 0.95. Same conclusion, stronger.”
+  答：“For the full grid we used a simpler similarity test. We ran the full U-LiRA attack on one group: against NegGrad+, the attacker could tell a trained-then-deleted photo from a never-trained one with AUC 0.95. Against a truly retrained model, the same attack scored 0.51 — a coin flip. So the attack isn’t crying wolf.”
 - **问：“压缩没让记忆回来，那语言模型的结论在人脸上不成立？”**
   答：“We can’t say that. That effect needs a model that looks like it forgot but still remembers underneath. Our approximate methods didn’t even look like they forgot, so there was nothing for compression to reveal. The question stays open for faces.”
 - **问：“NegGrad+ 擦掉了暗号，那暗号测试是不是没用？”**
@@ -331,6 +334,12 @@ U-LiRA 抽查（冻结配置；这次约 12 分钟，因为停掉的完整版已
 
 ```bash
 python3 -m mini_ever run exp03 --config configs/celeba_v1.json --groups 0 --seeds 1 --methods neggrad_plus
+```
+
+U-LiRA 对照（冻结配置；这次约 2 分钟，因为全部影子模型都已在缓存里）：
+
+```bash
+python3 -m mini_ever run exp03 --config configs/celeba_v1.json --groups 0 --seeds 1 --methods full_retrain
 ```
 
 完整版（54 个格子全部用 U-LiRA，每个格子额外需要 8 对影子模型，同组同种子的“从没见过”影子在方法之间共用）：
