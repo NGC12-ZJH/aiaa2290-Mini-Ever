@@ -108,7 +108,8 @@ pre 第 9 页的核心句是：**“credible deletion is only as strong as the w
   - 平均值把 B 说成 0.26，比 A 的 0.49 “好了一半”。对一个拿到旧特征库的攻击者来说，B 没有任何改善。**平均值奖励了“做了很多工作”，最大值衡量的是“这个人还能不能被找到”。**
 - **C 倒在 M 环，而且比预期倒得更早**：特征库删干净了，学生也重新蒸馏了，但 NegGrad+ 之后的主模型泄露仍有 0.35–0.49，和什么都不做的 A（0.42–0.50）相差不大，三组平均只降了约 13%。
   - 也就是说，这个近似方法在“特征相似度”这个最简单的测试上就没过关，不需要等到 L2（成员推断）或 L4（重新学习）。
-  - 原因：NegGrad+ 反着学的是**分类头**的输出（让模型“说不出这个人的名字”），而人脸识别靠的是**特征**（这张脸和注册照像不像），这一层几乎没动。实验 3 的 L1 会检验它是不是“分类上看起来忘了”。
+  - 原因：实验 3 显示，在这组冻结参数下，NegGrad+ **分类头和特征都基本没动**。删除后分类器仍能叫出约 62% 的人的名字（删除前约 74%），只忘掉了约 16%（见 [实验 3 分析](exp03_analysis.md) 第三节第 2 部分）。人脸识别靠的特征（这张脸和注册照像不像）也就几乎没变。
+  - **两个实验的数字对得上**：实验 3 里同一个 NegGrad+ 的主模型泄露（L2 简化基线，和这里的主模型节点量法相同）按组平均约为 0.44、0.37、0.35，这里是 0.485、0.370、0.345。差别来自汇总方式：这里先把 3 个种子的分数按人平均再算，实验 3 是每个种子单独算再平均。
   - 第 1 组的学生泄露 0.19，比 A 里的旧学生（0.06）还高：从“没真正忘掉”的老师重新蒸馏，学生把残留继承了过去。这一项区间较宽（0.09 至 0.34），判为不确定。
 - **D 和参照系统几乎分不出来**：12 个节点里 10 个通过。剩下 2 个是第 0 组的主模型和手机版，泄露 0.010 和 0.005，区间上限正好是 0.100，因为浮点误差略高于界值，按规则判为不确定。端到端可信度 0.99–1.00。这说明测量本身没有偏差：全部做到时，尺子确实读 0。
 - **端到端 = 最差节点，在这里是定义，不是发现**（见局限第 1 条）。实验 4 真正的证据是：**改进非最弱节点不会降低端到端泄露**。B 把两个节点从 0.5 降到 0，端到端一点没动；只有补上最弱的那个节点（C → 特征库，D → 主模型），端到端才下降。
@@ -149,13 +150,15 @@ pre 第 9 页的核心句是：**“credible deletion is only as strong as the w
 **两处和预期不同，台上的说法要改：**
 
 1. **4b**：按 overview 里事先写好的备选说法，改为 **“small tracing gaps are tolerable, large ones are not”**，并给出门槛：每人漏掉约 1 张照片测不出来，漏掉约 8 张（40%）就测得出来。原定台词 “Missing just 5% of the traces brought the leakage back to [Y]” **不能用**，5% 的结果是 0.01。
-2. **C**：近似遗忘不是“看起来过关、深挖才露馅”，而是在人脸特征层面基本没动。台上可以更直接地说，但要注明只测了一种方法和一组超参数（见局限第 3 条），实验 3 会比较更多方法。
+2. **C**：近似遗忘不是“看起来过关、深挖才露馅”，而是分类和特征都基本没动。台上可以更直接地说。换成实验 3 里的另外两种近似方法，结论也不变（见局限第 3 条），但仍要注明参数是事先冻结、没有调过的。
 
 ## 四、局限
 
 1. **端到端取最大值是定义，不是实验结论**：攻击者用最有用的那个节点，所以端到端泄露按定义就等于最差节点。实验 4 能检验的是：(a) 只改进非最弱节点，端到端不会下降（B）；(b) 平均值会给出误导性的结论（B 的 0.26）。它不能证明 T、D、M 三环在同一把数值尺子上可比。
 2. **特征库的 1.0 和 0 是结构上必然的**：库里有这个人，就一定查得到；没有，就一定是 −1。这两个值说明的是“记录在不在”，不需要统计检验。
-3. **C 只测了一种近似方法、一组超参数**：NegGrad+ 的 α = 0.99、3 轮、学习率 0.01 是事先冻结的，没有为了“忘得更多”去调。更激进的设置可能忘得更多，但通常也会损害模型效用。实验 3 会比较 NegGrad+、SCRUB、微调等方法在 L1–L5 上的表现，并报告效用。
+3. **C 只直接跑了一种近似方法、一组超参数**：NegGrad+ 的 α = 0.99、3 轮、学习率 0.01 是事先冻结的，没有为了“忘得更多”去调。更激进的设置可能忘得更多，但通常也会损害模型效用。
+   - **换方法不改变结论**：实验 3 用同样的主模型量法测了另外两种近似方法，删除后主模型泄露（9 个格子平均）分别是 NegGrad+ 0.39、微调 0.36、SCRUB 0.34，INT8 手机版是 0.33–0.39。端到端泄露取所有节点的最大值，所以 C 不论换成哪一种，端到端都至少约 0.34，仍然失败。这一条是从定义加实验 3 的数字推出来的，没有单独重跑配置 C。
+   - 这三种方法的效用都和删除前基本相同（1:N top-1 约 0.58），说明它们“没伤模型”，也说明它们“没怎么改模型”。
 4. **4b 的门槛只对这个规模成立**：每人约 20 张训练照，“40%”约 8 张。照片更多的人，漏掉同样比例对应的张数更多，门槛可能更早出现。
 5. **20% 那一档三组都不确定**：区间上限 0.10–0.26，跨过界值。每组只有 20 人，测不准这么小的信号。如果要精确定位门槛，需要更多人或更多种子。
 6. **规模与代表性**：每组 20 人、3 个种子。Mini-Ever 的数字只说明删除声明在结构上的难点，不代表 Ever 或 Paravision 的真实表现。
@@ -181,9 +184,13 @@ pre 第 9 页的核心句是：**“credible deletion is only as strong as the w
 
 如果只能放一句：**“Main model clean. Gallery forgotten. Person still found: 100%.”**
 
-### 第 7 页（M 环）可以呼应
+### 和第 7 页（M 环）呼应
 
-C 的结果可以先在第 7 页铺垫：“An approximate method left the face model almost unchanged.” 具体数字等实验 3 出来后，和 L1–L5 一起讲。
+第 7 页（实验 3）已经讲过：只屏蔽名字时，权重仍认得 74% 的人；NegGrad+ 和 SCRUB 擦掉了暗号，却仍能叫出 62%–64% 的人的名字。第 9 页讲到 C 时可以直接接一句：
+
+> “As we saw, the approximate method never really forgot. Put it in a system where everything else is done right, and the system still leaks — through that one link.”
+
+这样第 7 页的“方法没忘”和第 9 页的“整条链被它拖住”是同一批模型、同一个结论，前后呼应。
 
 ### 第 10 页最后一句不用改
 
@@ -194,7 +201,7 @@ C 的结果可以先在第 7 页铺垫：“An approximate method left the face 
 - **问：“端到端取最大值，不是你们自己定义出来的吗？”**
   答：“Yes, by design — an attacker uses whichever copy reveals the most. What the experiment shows is that fixing the other parts doesn’t help: in system B, two of three model copies were clean, and the end-to-end leakage didn’t move at all.”
 - **问：“近似遗忘是不是调一下参数就行？”**
-  答：“Maybe, and we didn’t tune it — the settings were fixed in advance. But that’s the point of the M link: without a test like ours, nobody would know whether the setting was enough.”
+  答：“Maybe, and we didn’t tune it — the settings were fixed in advance. We also checked two other approximate methods, fine-tuning and SCRUB: the main model still leaked 0.34 to 0.36, so the system would fail either way. That’s the point of the M link: without a test like ours, nobody would know whether the setting was enough.”
 - **问：“漏 5% 没事，那是不是说追踪不用很准？”**
   答：“In our setup, missing about one photo per person was undetectable. Missing eight was clearly detectable. So tracing can be imperfect, but not by much — and a real company doesn’t know in advance which side of that line it is on.”
 - **问：“4b 和账户删除有什么关系？”**
