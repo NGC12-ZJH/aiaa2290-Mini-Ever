@@ -1,0 +1,1217 @@
+{
+  "meta": {
+    "timestamp": "2026-11-24T04:56:30+00:00",
+    "git_commit": "11795a28b0b65e4b9f7eaa974b42ca7e18889df7",
+    "config_sha256": "9d1bbe65cd11dc2f2645ba69fccf0d09130189f173e1cc9c461492766f2caf0f",
+    "manifest_sha256": "904b9a8214ce8f79e3448c9a6c6ab30a675eb14f24c93c4416a28a3759edca22",
+    "canary_sha256": "dc4bb94789a025849306b53a2d6b2e3675eec0d0df0e02059ea03c90eb2dff0f",
+    "training_seeds": [
+      1,
+      2,
+      3
+    ],
+    "device": "cuda",
+    "torch": "2.11.0+cu128",
+    "python": "3.10.12"
+  },
+  "experiment": "exp02_deletability",
+  "seed_index": 0,
+  "requests": 20,
+  "designs": [
+    {
+      "design": "monolith",
+      "shards": 1,
+      "backbone": "resnet50",
+      "initial_training_seconds": 115.75742794500002,
+      "utility_before": {
+        "closed_set_top1_all": 0.5880428571428572,
+        "closed_set_top1_remaining_users": 0.5799444444444445,
+        "lfw": "n/a (LFW not available locally)"
+      },
+      "requests": [
+        {
+          "request": 1,
+          "local_seconds": 111.17568506099997,
+          "full_chain_seconds": {
+            "local": 111.17568506099997,
+            "student": 69.40075990500009,
+            "gallery": 6.165752976994554,
+            "deployment": 0.06540082499850541,
+            "total": 186.8075987679931
+          }
+        },
+        {
+          "request": 2,
+          "local_seconds": 111.02324668700021,
+          "full_chain_seconds": {
+            "local": 111.02324668700021,
+            "student": 68.59768884700134,
+            "gallery": 5.81447763700271,
+            "deployment": 0.03757566900458187,
+            "total": 185.47298884000884
+          }
+        },
+        {
+          "request": 3,
+          "local_seconds": 108.76687019999918,
+          "full_chain_seconds": {
+            "local": 108.76687019999918,
+            "student": 69.32841916500001,
+            "gallery": 7.155492594996758,
+            "deployment": 0.037683706999814603,
+            "total": 185.28846566699576
+          }
+        },
+        {
+          "request": 4,
+          "local_seconds": 110.65221969699996,
+          "full_chain_seconds": {
+            "local": 110.65221969699996,
+            "student": 72.03790080599902,
+            "gallery": 7.498366386003909,
+            "deployment": 0.04957070899399696,
+            "total": 190.23805759799689
+          }
+        },
+        {
+          "request": 5,
+          "local_seconds": 109.74503907100006,
+          "full_chain_seconds": {
+            "local": 109.74503907100006,
+            "student": 68.06508933800069,
+            "gallery": 7.4602971830026945,
+            "deployment": 0.04987506899487926,
+            "total": 185.32030066099833
+          }
+        },
+        {
+          "request": 6,
+          "local_seconds": 112.6644502909985,
+          "full_chain_seconds": {
+            "local": 112.6644502909985,
+            "student": 70.44304947000273,
+            "gallery": 7.4767189220001455,
+            "deployment": 0.04988522899657255,
+            "total": 190.63410391199795
+          }
+        },
+        {
+          "request": 7,
+          "local_seconds": 111.91294923099849,
+          "full_chain_seconds": {
+            "local": 111.91294923099849,
+            "student": 67.6701417559998,
+            "gallery": 7.4538338580023265,
+            "deployment": 0.05010915599996224,
+            "total": 187.08703400100057
+          }
+        },
+        {
+          "request": 8,
+          "local_seconds": 112.44562811799915,
+          "full_chain_seconds": {
+            "local": 112.44562811799915,
+            "student": 72.52523187000043,
+            "gallery": 7.636812537006335,
+            "deployment": 0.049373175999789964,
+            "total": 192.6570457010057
+          }
+        },
+        {
+          "request": 9,
+          "local_seconds": 108.59560282899838,
+          "full_chain_seconds": {
+            "local": 108.59560282899838,
+            "student": 68.78447179700015,
+            "gallery": 6.649832641000103,
+            "deployment": 0.036502159004157875,
+            "total": 184.0664094260028
+          }
+        },
+        {
+          "request": 10,
+          "local_seconds": 109.60475781800051,
+          "full_chain_seconds": {
+            "local": 109.60475781800051,
+            "student": 69.44057408200024,
+            "gallery": 6.139574173997971,
+            "deployment": 0.03689114900043933,
+            "total": 185.22179722299916
+          }
+        },
+        {
+          "request": 11,
+          "local_seconds": 107.81144988800224,
+          "full_chain_seconds": {
+            "local": 107.81144988800224,
+            "student": 67.56747647500015,
+            "gallery": 6.497489804001816,
+            "deployment": 0.035259876000054646,
+            "total": 181.91167604300426
+          }
+        },
+        {
+          "request": 12,
+          "local_seconds": 108.39231397899857,
+          "full_chain_seconds": {
+            "local": 108.39231397899857,
+            "student": 66.43174184899908,
+            "gallery": 5.911858417995973,
+            "deployment": 0.03667190499982098,
+            "total": 180.77258615099345
+          }
+        },
+        {
+          "request": 13,
+          "local_seconds": 108.00100962099896,
+          "full_chain_seconds": {
+            "local": 108.00100962099896,
+            "student": 69.00469162699665,
+            "gallery": 5.620365719994879,
+            "deployment": 0.035077779000857845,
+            "total": 182.66114474699134
+          }
+        },
+        {
+          "request": 14,
+          "local_seconds": 109.90925219899873,
+          "full_chain_seconds": {
+            "local": 109.90925219899873,
+            "student": 73.79764220099969,
+            "gallery": 6.313296916996478,
+            "deployment": 0.037181906001933385,
+            "total": 190.05737322299683
+          }
+        },
+        {
+          "request": 15,
+          "local_seconds": 107.92510934299935,
+          "full_chain_seconds": {
+            "local": 107.92510934299935,
+            "student": 67.24068720399737,
+            "gallery": 7.719408732002194,
+            "deployment": 0.049138743001094554,
+            "total": 182.934344022
+          }
+        },
+        {
+          "request": 16,
+          "local_seconds": 105.42615556000237,
+          "full_chain_seconds": {
+            "local": 105.42615556000237,
+            "student": 69.99879740599863,
+            "gallery": 9.280148558005749,
+            "deployment": 0.05017455699999118,
+            "total": 184.75527608100674
+          }
+        },
+        {
+          "request": 17,
+          "local_seconds": 108.45192248300009,
+          "full_chain_seconds": {
+            "local": 108.45192248300009,
+            "student": 68.50631231499938,
+            "gallery": 9.001575762995344,
+            "deployment": 0.050022999006614555,
+            "total": 186.00983356000143
+          }
+        },
+        {
+          "request": 18,
+          "local_seconds": 109.65127814600055,
+          "full_chain_seconds": {
+            "local": 109.65127814600055,
+            "student": 69.90458142100033,
+            "gallery": 9.25938834000408,
+            "deployment": 0.050723943997581955,
+            "total": 188.86597185100254
+          }
+        },
+        {
+          "request": 19,
+          "local_seconds": 108.28056442899833,
+          "full_chain_seconds": {
+            "local": 108.28056442899833,
+            "student": 70.28274750200217,
+            "gallery": 9.528751305006153,
+            "deployment": 0.4242074919966399,
+            "total": 188.5162707280033
+          }
+        },
+        {
+          "request": 20,
+          "local_seconds": 108.13634445999924,
+          "full_chain_seconds": {
+            "local": 108.13634445999924,
+            "student": 69.46071464300258,
+            "gallery": 11.069919270004903,
+            "deployment": 0.054992983998090494,
+            "total": 188.7219713570048
+          }
+        }
+      ],
+      "cumulative_local_seconds": 2188.571849110993,
+      "utility_after": {
+        "closed_set_top1_all": 0.5775095238095238,
+        "closed_set_top1_remaining_users": 0.5723563218390805,
+        "lfw": "n/a (LFW not available locally)"
+      }
+    },
+    {
+      "design": "sisa-S1",
+      "shards": 1,
+      "backbone": "resnet18",
+      "initial_training_seconds": 73.29244729399943,
+      "utility_before": {
+        "closed_set_top1_all": 0.36451904761904763,
+        "closed_set_top1_remaining_users": 0.43,
+        "lfw": "n/a (LFW not available locally)"
+      },
+      "requests": [
+        {
+          "request": 1,
+          "local_seconds": 68.09198078799818,
+          "full_chain_seconds": {
+            "local": 68.09198078799818,
+            "student": 71.00274464800168,
+            "gallery": 8.08044735599833,
+            "deployment": 0.02072277599654626,
+            "total": 147.19589556799474
+          }
+        },
+        {
+          "request": 2,
+          "local_seconds": 65.17421846900106,
+          "full_chain_seconds": {
+            "local": 65.17421846900106,
+            "student": 69.15231213399966,
+            "gallery": 7.501061979004589,
+            "deployment": 0.021000336004362907,
+            "total": 141.84859291800967
+          }
+        },
+        {
+          "request": 3,
+          "local_seconds": 66.75364616599836,
+          "full_chain_seconds": {
+            "local": 66.75364616599836,
+            "student": 68.825850479996,
+            "gallery": 7.611045231002208,
+            "deployment": 0.0226111449956079,
+            "total": 143.21315302199218
+          }
+        },
+        {
+          "request": 4,
+          "local_seconds": 66.11092474400357,
+          "full_chain_seconds": {
+            "local": 66.11092474400357,
+            "student": 68.5499688619966,
+            "gallery": 5.501100584995584,
+            "deployment": 0.014902504000929184,
+            "total": 140.17689669499669
+          }
+        },
+        {
+          "request": 5,
+          "local_seconds": 66.07101687599788,
+          "full_chain_seconds": {
+            "local": 66.07101687599788,
+            "student": 71.76628774600249,
+            "gallery": 26.948034469998674,
+            "deployment": 0.023115827003493905,
+            "total": 164.80845491900254
+          }
+        },
+        {
+          "request": 6,
+          "local_seconds": 67.2452449659977,
+          "full_chain_seconds": {
+            "local": 67.2452449659977,
+            "student": 67.83451317300205,
+            "gallery": 7.764924261005945,
+            "deployment": 0.022044425997592043,
+            "total": 142.8667268260033
+          }
+        },
+        {
+          "request": 7,
+          "local_seconds": 65.01905231200362,
+          "full_chain_seconds": {
+            "local": 65.01905231200362,
+            "student": 67.29911969100067,
+            "gallery": 8.915612695003801,
+            "deployment": 0.02086332400358515,
+            "total": 141.25464802201168
+          }
+        },
+        {
+          "request": 8,
+          "local_seconds": 61.85758550400351,
+          "full_chain_seconds": {
+            "local": 61.85758550400351,
+            "student": 67.71670483799971,
+            "gallery": 6.954187413997715,
+            "deployment": 0.015088603002368473,
+            "total": 136.5435663590033
+          }
+        },
+        {
+          "request": 9,
+          "local_seconds": 63.542921960994136,
+          "full_chain_seconds": {
+            "local": 63.542921960994136,
+            "student": 68.60661865000293,
+            "gallery": 6.10822550800367,
+            "deployment": 0.017151532003481407,
+            "total": 138.27491765100422
+          }
+        },
+        {
+          "request": 10,
+          "local_seconds": 65.36756118499761,
+          "full_chain_seconds": {
+            "local": 65.36756118499761,
+            "student": 68.9673212800044,
+            "gallery": 7.4654081519984175,
+            "deployment": 0.021349779999582097,
+            "total": 141.821640397
+          }
+        },
+        {
+          "request": 11,
+          "local_seconds": 65.77149268399808,
+          "full_chain_seconds": {
+            "local": 65.77149268399808,
+            "student": 67.70748996700422,
+            "gallery": 7.612455408998358,
+            "deployment": 0.02130399200541433,
+            "total": 141.11274205200607
+          }
+        },
+        {
+          "request": 12,
+          "local_seconds": 64.22505315199669,
+          "full_chain_seconds": {
+            "local": 64.22505315199669,
+            "student": 68.15505090600345,
+            "gallery": 6.251796525000827,
+            "deployment": 0.016581126001256052,
+            "total": 138.64848170900223
+          }
+        },
+        {
+          "request": 13,
+          "local_seconds": 65.27227758999652,
+          "full_chain_seconds": {
+            "local": 65.27227758999652,
+            "student": 67.68039022700395,
+            "gallery": 13.094848909000575,
+            "deployment": 0.01714886599802412,
+            "total": 146.06466559199907
+          }
+        },
+        {
+          "request": 14,
+          "local_seconds": 64.57919605200004,
+          "full_chain_seconds": {
+            "local": 64.57919605200004,
+            "student": 67.15665090599941,
+            "gallery": 6.059162623001612,
+            "deployment": 0.016374179998820182,
+            "total": 137.8113837609999
+          }
+        },
+        {
+          "request": 15,
+          "local_seconds": 64.04262337699765,
+          "full_chain_seconds": {
+            "local": 64.04262337699765,
+            "student": 69.07392720999633,
+            "gallery": 6.592442569002742,
+            "deployment": 0.015351090994954575,
+            "total": 139.72434424699168
+          }
+        },
+        {
+          "request": 16,
+          "local_seconds": 66.81650698799785,
+          "full_chain_seconds": {
+            "local": 66.81650698799785,
+            "student": 70.11333716800436,
+            "gallery": 23.880158015002962,
+            "deployment": 0.01691148499958217,
+            "total": 160.82691365600476
+          }
+        },
+        {
+          "request": 17,
+          "local_seconds": 63.88786105700274,
+          "full_chain_seconds": {
+            "local": 63.88786105700274,
+            "student": 68.81745459199738,
+            "gallery": 5.822056257005897,
+            "deployment": 0.018417131002934184,
+            "total": 138.54578903700894
+          }
+        },
+        {
+          "request": 18,
+          "local_seconds": 63.48957712399715,
+          "full_chain_seconds": {
+            "local": 63.48957712399715,
+            "student": 67.1588743579996,
+            "gallery": 6.159104637998098,
+            "deployment": 0.01770306099933805,
+            "total": 136.82525918099418
+          }
+        },
+        {
+          "request": 19,
+          "local_seconds": 63.63569106999785,
+          "full_chain_seconds": {
+            "local": 63.63569106999785,
+            "student": 70.18744522899942,
+            "gallery": 7.124353162995249,
+            "deployment": 0.015424538993102033,
+            "total": 140.96291400098562
+          }
+        },
+        {
+          "request": 20,
+          "local_seconds": 63.96420667399798,
+          "full_chain_seconds": {
+            "local": 63.96420667399798,
+            "student": 72.93671891999838,
+            "gallery": 7.8985682600032305,
+            "deployment": 0.017544661001011264,
+            "total": 144.8170385150006
+          }
+        }
+      ],
+      "cumulative_local_seconds": 1300.9186387389782,
+      "utility_after": {
+        "closed_set_top1_all": 0.3580190476190476,
+        "closed_set_top1_remaining_users": 0.43264367816091953,
+        "lfw": "n/a (LFW not available locally)"
+      }
+    },
+    {
+      "design": "sisa-S4",
+      "shards": 4,
+      "backbone": "resnet18",
+      "initial_training_seconds": 76.94383567699697,
+      "utility_before": {
+        "closed_set_top1_all": 0.30530952380952386,
+        "closed_set_top1_remaining_users": 0.32311111111111107,
+        "lfw": "n/a (LFW not available locally)"
+      },
+      "requests": [
+        {
+          "request": 1,
+          "local_seconds": 17.88721966400044,
+          "full_chain_seconds": {
+            "local": 17.88721966400044,
+            "student": 70.82971847499721,
+            "gallery": 7.64852658000018,
+            "deployment": 0.08443900699785445,
+            "total": 96.44990372599568
+          }
+        },
+        {
+          "request": 2,
+          "local_seconds": 18.440744559004088,
+          "full_chain_seconds": {
+            "local": 18.440744559004088,
+            "student": 72.7108429009968,
+            "gallery": 7.53214380099962,
+            "deployment": 0.05948794700088911,
+            "total": 98.74321920800139
+          }
+        },
+        {
+          "request": 3,
+          "local_seconds": 18.809053987999505,
+          "full_chain_seconds": {
+            "local": 18.809053987999505,
+            "student": 71.27802363399678,
+            "gallery": 25.928430248997756,
+            "deployment": 0.06013224799971795,
+            "total": 116.07564011899376
+          }
+        },
+        {
+          "request": 4,
+          "local_seconds": 18.15636167499906,
+          "full_chain_seconds": {
+            "local": 18.15636167499906,
+            "student": 68.32140864399844,
+            "gallery": 7.629564423994452,
+            "deployment": 0.08469110199803254,
+            "total": 94.19202584498998
+          }
+        },
+        {
+          "request": 5,
+          "local_seconds": 18.855435426004988,
+          "full_chain_seconds": {
+            "local": 18.855435426004988,
+            "student": 73.14040425099665,
+            "gallery": 7.8255946499994025,
+            "deployment": 0.08407657500356436,
+            "total": 99.90551090200461
+          }
+        },
+        {
+          "request": 6,
+          "local_seconds": 18.792063745000632,
+          "full_chain_seconds": {
+            "local": 18.792063745000632,
+            "student": 72.66426247299387,
+            "gallery": 7.690219411997532,
+            "deployment": 0.06750214500061702,
+            "total": 99.21404777499265
+          }
+        },
+        {
+          "request": 7,
+          "local_seconds": 19.466406895000546,
+          "full_chain_seconds": {
+            "local": 19.466406895000546,
+            "student": 71.61782442800177,
+            "gallery": 7.879808306002815,
+            "deployment": 0.08454555799835362,
+            "total": 99.04858518700348
+          }
+        },
+        {
+          "request": 8,
+          "local_seconds": 18.329257060999225,
+          "full_chain_seconds": {
+            "local": 18.329257060999225,
+            "student": 71.2773770030035,
+            "gallery": 6.068575461002183,
+            "deployment": 0.05871359899902018,
+            "total": 95.73392312400392
+          }
+        },
+        {
+          "request": 9,
+          "local_seconds": 18.425271876003535,
+          "full_chain_seconds": {
+            "local": 18.425271876003535,
+            "student": 69.72656550299871,
+            "gallery": 5.747383609996177,
+            "deployment": 0.15090704800240928,
+            "total": 94.05012803700083
+          }
+        },
+        {
+          "request": 10,
+          "local_seconds": 19.592294878995745,
+          "full_chain_seconds": {
+            "local": 19.592294878995745,
+            "student": 69.28650821799965,
+            "gallery": 15.07473724400188,
+            "deployment": 0.06159409300016705,
+            "total": 104.01513443399745
+          }
+        },
+        {
+          "request": 11,
+          "local_seconds": 18.668540307000512,
+          "full_chain_seconds": {
+            "local": 18.668540307000512,
+            "student": 68.82737954500044,
+            "gallery": 5.929872110005817,
+            "deployment": 0.05826766000245698,
+            "total": 93.48405962200923
+          }
+        },
+        {
+          "request": 12,
+          "local_seconds": 19.840924203999748,
+          "full_chain_seconds": {
+            "local": 19.840924203999748,
+            "student": 69.54893367299519,
+            "gallery": 6.751497015000496,
+            "deployment": 0.06004998400021577,
+            "total": 96.20140487599565
+          }
+        },
+        {
+          "request": 13,
+          "local_seconds": 18.236275944000226,
+          "full_chain_seconds": {
+            "local": 18.236275944000226,
+            "student": 70.77679571100452,
+            "gallery": 6.10471158499422,
+            "deployment": 0.059151339999516495,
+            "total": 95.17693457999849
+          }
+        },
+        {
+          "request": 14,
+          "local_seconds": 18.219694258004893,
+          "full_chain_seconds": {
+            "local": 18.219694258004893,
+            "student": 69.76405189200159,
+            "gallery": 6.019274022997706,
+            "deployment": 0.05867396700341487,
+            "total": 94.0616941400076
+          }
+        },
+        {
+          "request": 15,
+          "local_seconds": 18.758482837001793,
+          "full_chain_seconds": {
+            "local": 18.758482837001793,
+            "student": 71.70025155299663,
+            "gallery": 5.97327834799944,
+            "deployment": 0.05977841000276385,
+            "total": 96.49179114800063
+          }
+        },
+        {
+          "request": 16,
+          "local_seconds": 18.38682971199887,
+          "full_chain_seconds": {
+            "local": 18.38682971199887,
+            "student": 72.69149309500062,
+            "gallery": 21.574339537000924,
+            "deployment": 0.29175252599816304,
+            "total": 112.94441486999858
+          }
+        },
+        {
+          "request": 17,
+          "local_seconds": 18.352592994997394,
+          "full_chain_seconds": {
+            "local": 18.352592994997394,
+            "student": 71.41610546599986,
+            "gallery": 6.238617900999088,
+            "deployment": 0.06004212799598463,
+            "total": 96.06735848999233
+          }
+        },
+        {
+          "request": 18,
+          "local_seconds": 18.91718246999517,
+          "full_chain_seconds": {
+            "local": 18.91718246999517,
+            "student": 69.54152632800105,
+            "gallery": 5.85032578100072,
+            "deployment": 0.05759826299617998,
+            "total": 94.36663284199312
+          }
+        },
+        {
+          "request": 19,
+          "local_seconds": 19.950870936001593,
+          "full_chain_seconds": {
+            "local": 19.950870936001593,
+            "student": 66.96418132099643,
+            "gallery": 23.5505271180009,
+            "deployment": 0.06191796899656765,
+            "total": 110.52749734399549
+          }
+        },
+        {
+          "request": 20,
+          "local_seconds": 19.173026221003965,
+          "full_chain_seconds": {
+            "local": 19.173026221003965,
+            "student": 68.53230583700497,
+            "gallery": 5.85453459299606,
+            "deployment": 0.05822279300627997,
+            "total": 93.61808944401128
+          }
+        }
+      ],
+      "cumulative_local_seconds": 375.25852965201193,
+      "utility_after": {
+        "closed_set_top1_all": 0.2918095238095238,
+        "closed_set_top1_remaining_users": 0.3118390804597701,
+        "lfw": "n/a (LFW not available locally)"
+      }
+    },
+    {
+      "design": "sisa-S8",
+      "shards": 8,
+      "backbone": "resnet18",
+      "initial_training_seconds": 94.5720382520085,
+      "utility_before": {
+        "closed_set_top1_all": 0.27751904761904755,
+        "closed_set_top1_remaining_users": 0.28655555555555556,
+        "lfw": "n/a (LFW not available locally)"
+      },
+      "requests": [
+        {
+          "request": 1,
+          "local_seconds": 12.618203047000861,
+          "full_chain_seconds": {
+            "local": 12.618203047000861,
+            "student": 92.74637300599716,
+            "gallery": 7.477005164997536,
+            "deployment": 0.13101440200262005,
+            "total": 112.97259561999817
+          }
+        },
+        {
+          "request": 2,
+          "local_seconds": 12.899796742996841,
+          "full_chain_seconds": {
+            "local": 12.899796742996841,
+            "student": 97.5730943919989,
+            "gallery": 8.21538915400015,
+            "deployment": 0.1655181289970642,
+            "total": 118.85379841799295
+          }
+        },
+        {
+          "request": 3,
+          "local_seconds": 12.817169879002904,
+          "full_chain_seconds": {
+            "local": 12.817169879002904,
+            "student": 94.95704669800034,
+            "gallery": 7.202231606999703,
+            "deployment": 0.11974688800546573,
+            "total": 115.09619507200841
+          }
+        },
+        {
+          "request": 4,
+          "local_seconds": 12.791242780993343,
+          "full_chain_seconds": {
+            "local": 12.791242780993343,
+            "student": 92.55590615300025,
+            "gallery": 7.265560406995064,
+            "deployment": 0.16445052200288046,
+            "total": 112.77715986299154
+          }
+        },
+        {
+          "request": 5,
+          "local_seconds": 11.930997748000664,
+          "full_chain_seconds": {
+            "local": 11.930997748000664,
+            "student": 93.27410756600148,
+            "gallery": 6.765244294998411,
+            "deployment": 0.12882630400417838,
+            "total": 112.09917591300473
+          }
+        },
+        {
+          "request": 6,
+          "local_seconds": 12.003557759002433,
+          "full_chain_seconds": {
+            "local": 12.003557759002433,
+            "student": 90.01118793200294,
+            "gallery": 15.104162870004075,
+            "deployment": 0.17388921000383561,
+            "total": 117.29279777101328
+          }
+        },
+        {
+          "request": 7,
+          "local_seconds": 11.87797075400158,
+          "full_chain_seconds": {
+            "local": 11.87797075400158,
+            "student": 89.20289180400141,
+            "gallery": 7.712915445001272,
+            "deployment": 0.1733100910059875,
+            "total": 108.96708809401025
+          }
+        },
+        {
+          "request": 8,
+          "local_seconds": 12.271687250999094,
+          "full_chain_seconds": {
+            "local": 12.271687250999094,
+            "student": 89.32025000700378,
+            "gallery": 6.436271270998986,
+            "deployment": 0.12067893000494223,
+            "total": 108.1488874590068
+          }
+        },
+        {
+          "request": 9,
+          "local_seconds": 11.647058862996346,
+          "full_chain_seconds": {
+            "local": 11.647058862996346,
+            "student": 93.37576463599544,
+            "gallery": 6.192863553995267,
+            "deployment": 0.11771863600006327,
+            "total": 111.33340568898711
+          }
+        },
+        {
+          "request": 10,
+          "local_seconds": 11.93810046800354,
+          "full_chain_seconds": {
+            "local": 11.93810046800354,
+            "student": 89.43967123499897,
+            "gallery": 6.240381340001477,
+            "deployment": 0.11690298999747029,
+            "total": 107.73505603300146
+          }
+        },
+        {
+          "request": 11,
+          "local_seconds": 12.495798664996983,
+          "full_chain_seconds": {
+            "local": 12.495798664996983,
+            "student": 92.71033345600154,
+            "gallery": 27.380013171001337,
+            "deployment": 0.11917953199736075,
+            "total": 132.70532482399722
+          }
+        },
+        {
+          "request": 12,
+          "local_seconds": 12.231949140994402,
+          "full_chain_seconds": {
+            "local": 12.231949140994402,
+            "student": 89.34216328999901,
+            "gallery": 7.477680526004406,
+            "deployment": 0.15333360599470325,
+            "total": 109.20512656299252
+          }
+        },
+        {
+          "request": 13,
+          "local_seconds": 12.397690051999234,
+          "full_chain_seconds": {
+            "local": 12.397690051999234,
+            "student": 92.0354595739991,
+            "gallery": 6.571855718000734,
+            "deployment": 0.12222606000432279,
+            "total": 111.1272314040034
+          }
+        },
+        {
+          "request": 14,
+          "local_seconds": 12.010824668999703,
+          "full_chain_seconds": {
+            "local": 12.010824668999703,
+            "student": 96.78867661699769,
+            "gallery": 6.69819978200394,
+            "deployment": 0.11938404399552383,
+            "total": 115.61708511199686
+          }
+        },
+        {
+          "request": 15,
+          "local_seconds": 11.68565676700382,
+          "full_chain_seconds": {
+            "local": 11.68565676700382,
+            "student": 90.38556075499946,
+            "gallery": 8.248509040997305,
+            "deployment": 0.17078410599788185,
+            "total": 110.49051066899847
+          }
+        },
+        {
+          "request": 16,
+          "local_seconds": 12.130024996004067,
+          "full_chain_seconds": {
+            "local": 12.130024996004067,
+            "student": 97.68098598699726,
+            "gallery": 6.616013925995503,
+            "deployment": 0.11953010900469963,
+            "total": 116.54655501800153
+          }
+        },
+        {
+          "request": 17,
+          "local_seconds": 12.670477897001547,
+          "full_chain_seconds": {
+            "local": 12.670477897001547,
+            "student": 97.50348005400156,
+            "gallery": 33.73502772700158,
+            "deployment": 0.11992271499912022,
+            "total": 144.0289083930038
+          }
+        },
+        {
+          "request": 18,
+          "local_seconds": 12.230440467996232,
+          "full_chain_seconds": {
+            "local": 12.230440467996232,
+            "student": 93.31844871800422,
+            "gallery": 6.5134311619985965,
+            "deployment": 0.11969419199886033,
+            "total": 112.18201453999791
+          }
+        },
+        {
+          "request": 19,
+          "local_seconds": 11.938564320997102,
+          "full_chain_seconds": {
+            "local": 11.938564320997102,
+            "student": 94.98134861700237,
+            "gallery": 7.347830231999978,
+            "deployment": 0.41861916099878727,
+            "total": 114.68636233099824
+          }
+        },
+        {
+          "request": 20,
+          "local_seconds": 12.39795873100229,
+          "full_chain_seconds": {
+            "local": 12.39795873100229,
+            "student": 92.42718213899934,
+            "gallery": 8.17088922199764,
+            "deployment": 0.16948715499893297,
+            "total": 113.1655172469982
+          }
+        }
+      ],
+      "cumulative_local_seconds": 244.985170999993,
+      "utility_after": {
+        "closed_set_top1_all": 0.27077619047619045,
+        "closed_set_top1_remaining_users": 0.2832183908045977,
+        "lfw": "n/a (LFW not available locally)"
+      }
+    },
+    {
+      "design": "sisa-S16",
+      "shards": 16,
+      "backbone": "resnet18",
+      "initial_training_seconds": 132.14643040500232,
+      "utility_before": {
+        "closed_set_top1_all": 0.24963333333333332,
+        "closed_set_top1_remaining_users": 0.2520555555555556,
+        "lfw": "n/a (LFW not available locally)"
+      },
+      "requests": [
+        {
+          "request": 1,
+          "local_seconds": 8.557363019004697,
+          "full_chain_seconds": {
+            "local": 8.557363019004697,
+            "student": 147.3752832540049,
+            "gallery": 17.27140927000437,
+            "deployment": 0.3495314609972411,
+            "total": 173.5535870040112
+          }
+        },
+        {
+          "request": 2,
+          "local_seconds": 7.74751392500184,
+          "full_chain_seconds": {
+            "local": 7.74751392500184,
+            "student": 144.7802717559971,
+            "gallery": 7.523867881995102,
+            "deployment": 0.24785469699418172,
+            "total": 160.29950825998822
+          }
+        },
+        {
+          "request": 3,
+          "local_seconds": 7.790017551997153,
+          "full_chain_seconds": {
+            "local": 7.790017551997153,
+            "student": 140.0170810330019,
+            "gallery": 16.277636909995636,
+            "deployment": 0.34632423400034895,
+            "total": 164.43105972899502
+          }
+        },
+        {
+          "request": 4,
+          "local_seconds": 7.896673431998352,
+          "full_chain_seconds": {
+            "local": 7.896673431998352,
+            "student": 138.63834684099857,
+            "gallery": 8.884679589995358,
+            "deployment": 0.37273182599892607,
+            "total": 155.7924316889912
+          }
+        },
+        {
+          "request": 5,
+          "local_seconds": 9.273200251001981,
+          "full_chain_seconds": {
+            "local": 9.273200251001981,
+            "student": 148.50340137500461,
+            "gallery": 15.311694067000644,
+            "deployment": 0.23776966400328092,
+            "total": 173.32606535701052
+          }
+        },
+        {
+          "request": 6,
+          "local_seconds": 7.973580821999349,
+          "full_chain_seconds": {
+            "local": 7.973580821999349,
+            "student": 133.22672080600023,
+            "gallery": 16.158307983998384,
+            "deployment": 0.24120286199467955,
+            "total": 157.59981247399264
+          }
+        },
+        {
+          "request": 7,
+          "local_seconds": 7.932710439003131,
+          "full_chain_seconds": {
+            "local": 7.932710439003131,
+            "student": 147.7874332660067,
+            "gallery": 7.102681547003158,
+            "deployment": 0.23962039699836168,
+            "total": 163.06244564901135
+          }
+        },
+        {
+          "request": 8,
+          "local_seconds": 7.851723522995599,
+          "full_chain_seconds": {
+            "local": 7.851723522995599,
+            "student": 139.78390096600197,
+            "gallery": 15.117626330997155,
+            "deployment": 0.24287425399961649,
+            "total": 162.99612507399434
+          }
+        },
+        {
+          "request": 9,
+          "local_seconds": 8.169885163995787,
+          "full_chain_seconds": {
+            "local": 8.169885163995787,
+            "student": 157.31355451299896,
+            "gallery": 7.800713046002784,
+            "deployment": 0.2571148560018628,
+            "total": 173.5412675789994
+          }
+        },
+        {
+          "request": 10,
+          "local_seconds": 8.272195042998646,
+          "full_chain_seconds": {
+            "local": 8.272195042998646,
+            "student": 150.44763448400045,
+            "gallery": 8.971919216004608,
+            "deployment": 0.24811143800616264,
+            "total": 167.93986018100986
+          }
+        },
+        {
+          "request": 11,
+          "local_seconds": 8.125915803997486,
+          "full_chain_seconds": {
+            "local": 8.125915803997486,
+            "student": 146.9374550900029,
+            "gallery": 8.471293076996517,
+            "deployment": 0.2376824300008593,
+            "total": 163.77234640099778
+          }
+        },
+        {
+          "request": 12,
+          "local_seconds": 8.236550237998017,
+          "full_chain_seconds": {
+            "local": 8.236550237998017,
+            "student": 150.14313199299795,
+            "gallery": 17.73305223499483,
+            "deployment": 0.7239010029952624,
+            "total": 176.83663546898606
+          }
+        },
+        {
+          "request": 13,
+          "local_seconds": 8.639126778994978,
+          "full_chain_seconds": {
+            "local": 8.639126778994978,
+            "student": 147.12593842399656,
+            "gallery": 16.506003346999933,
+            "deployment": 0.4566579849997652,
+            "total": 172.72772653499123
+          }
+        },
+        {
+          "request": 14,
+          "local_seconds": 7.859735318997991,
+          "full_chain_seconds": {
+            "local": 7.859735318997991,
+            "student": 149.57007506000082,
+            "gallery": 7.46590718600055,
+            "deployment": 0.2403745639967383,
+            "total": 165.1360921289961
+          }
+        },
+        {
+          "request": 15,
+          "local_seconds": 9.224211900997034,
+          "full_chain_seconds": {
+            "local": 9.224211900997034,
+            "student": 166.93065716499405,
+            "gallery": 7.049477242995636,
+            "deployment": 0.24153999099507928,
+            "total": 183.4458862999818
+          }
+        },
+        {
+          "request": 16,
+          "local_seconds": 8.13280134699744,
+          "full_chain_seconds": {
+            "local": 8.13280134699744,
+            "student": 151.9838987930052,
+            "gallery": 8.937866093001503,
+            "deployment": 0.24243423599546077,
+            "total": 169.2970004689996
+          }
+        },
+        {
+          "request": 17,
+          "local_seconds": 8.910856023998349,
+          "full_chain_seconds": {
+            "local": 8.910856023998349,
+            "student": 145.27145033099805,
+            "gallery": 7.017085331004637,
+            "deployment": 0.23645654700521845,
+            "total": 161.43584823300625
+          }
+        },
+        {
+          "request": 18,
+          "local_seconds": 8.07589041099709,
+          "full_chain_seconds": {
+            "local": 8.07589041099709,
+            "student": 150.72718077099853,
+            "gallery": 7.707251095001993,
+            "deployment": 0.23918230600247625,
+            "total": 166.7495045830001
+          }
+        },
+        {
+          "request": 19,
+          "local_seconds": 8.36638950699853,
+          "full_chain_seconds": {
+            "local": 8.36638950699853,
+            "student": 146.42805747500097,
+            "gallery": 8.421664510002302,
+            "deployment": 0.24592343399854144,
+            "total": 163.46203492600034
+          }
+        },
+        {
+          "request": 20,
+          "local_seconds": 9.46331402099895,
+          "full_chain_seconds": {
+            "local": 9.46331402099895,
+            "student": 141.43480002199794,
+            "gallery": 9.367138080000586,
+            "deployment": 0.3708694979941356,
+            "total": 160.63612162099162
+          }
+        }
+      ],
+      "cumulative_local_seconds": 166.4996545209724,
+      "utility_after": {
+        "closed_set_top1_all": 0.25544285714285714,
+        "closed_set_top1_remaining_users": 0.2569540229885058,
+        "lfw": "n/a (LFW not available locally)"
+      }
+    }
+  ]
+}
