@@ -46,14 +46,13 @@
 > **Twenty users ask to be deleted. We delete them, then check every box.**”
 
 ▶ **点击 2**（右边：指标卡片）
-> “To check, we need **a metric**. We call it **leakage**, in three steps.
-> **One: score** each deleted person — how well does the system match a new photo of them to them?
-> **Two: repeat** that on a **reference model trained without them** — a model that **never saw them**.
-> **Three: compare all pairs.** **AUC** is how often the deleted system scores higher.
+> “To check, we need **a metric**: **leakage**. Three steps. **Score** each deleted person on a **new photo** against their **record**. Do the same on a **reference** model that **never saw them**. Then **compare**: **AUC** is how often the deleted system scores higher.
 >
-> **Leakage equals two AUC minus one.** **Zero** is a **coin flip** — forgotten. **One** means it’s **always recognised**.
+> **Leakage = 2 · AUC − 1.** **Zero** means **forgotten** — no better than a coin flip. **One** means **always recognised**.
 >
-> A copy **passes** only if its **whole 90% interval** stays **below 0.1** — a threshold **fixed in advance**. And the **system** is scored by **its worst copy**, because that’s where an attacker looks.”
+> A copy **passes** if its **90% interval** stays at or below **0.1**. And a **system** is only as good as **its worst copy**.”
+
+*（被问到细节：翻附录 A2，那里有完整定义、打分方式和判定规则。）*
 
 ▶ **点击 3**（底部两行）
 > “So **the test is not ‘can it still recognise them?’ — it is ‘does it act like it never met them?’** And to be clear: **small model, celebrity photos, twenty people per test — it shows where the structure breaks, not how Ever would have scored.**”

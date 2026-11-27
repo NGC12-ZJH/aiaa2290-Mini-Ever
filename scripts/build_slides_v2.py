@@ -375,31 +375,39 @@ rw = R - rx
 box(n5, rx, cy, rw, ch_)
 x0, wi = rx + 320040, rw - 640080
 label(n5, x0, cy + 228600, wi, "THE METRIC · LEAKAGE")
-steps5 = [("1", "Score", "each deleted person: how well the system matches a new photo of them to them."),
-          ("2", "Repeat", "on a reference model trained without them — the “never saw them” baseline."),
-          ("3", "Compare", "all deleted-vs-reference pairs. AUC = share where the deleted system scores higher.")]
-for i, (n, h, b_) in enumerate(steps5):
-    yy = cy + 640080 + i * 685800
-    text(n5, x0, yy, 365760, 640080, n, size=24, bold=True, color=SAND)
-    text(n5, x0 + 411480, yy + 22860, wi - 411480, 640080, [[(h + " ", {"bold": True, "color": NAVY}), (b_, {})]],
-         size=15, color=INK)
-ftb = text(n5, x0, cy + 2651760, wi, 548640, "", size=26, align=PP_ALIGN.CENTER, anchor=MSO_ANCHOR.MIDDLE)
+steps5 = [("Score", "new photo vs. record"), ("Reference", "never saw them"), ("Compare", "AUC")]
+fgap = 228600
+fw = (wi - 2 * fgap) // 3
+fy, fh = cy + 640080, 1005840
+for i, (kw, sub) in enumerate(steps5):
+    fx = x0 + i * (fw + fgap)
+    box(n5, fx, fy, fw, fh, fill=CREAM, line=None)
+    text(n5, fx, fy + 91440, fw, fh - 182880, [
+        [(f"{i + 1}", {"bold": True, "color": SAND, "size": 18})],
+        [(kw, {"bold": True, "color": NAVY, "size": 19})],
+        [(sub, {"color": SLATE, "size": 14, "italic": True})],
+    ], align=PP_ALIGN.CENTER, anchor=MSO_ANCHOR.MIDDLE)
+    if i < 2:
+        arrow(n5, fx + fw + 22860, fy + fh // 2, fx + fw + fgap - 22860, fy + fh // 2, width=1.25)
+ftb = text(n5, x0, cy + 1874520, wi, 548640, "", size=28, align=PP_ALIGN.CENTER, anchor=MSO_ANCHOR.MIDDLE)
 math_runs(ftb.text_frame.paragraphs[0], [("Leakage", False, False), (" = 2 · ", False, False), ("AUC", False, False),
-                                         (" − 1", False, False)], size=26)
+                                         (" − 1", False, False)], size=28)
 # scale bar
-sx, sy, sw = x0 + 91440, cy + 3383280, wi - 182880
+sx, sy, sw = x0 + 91440, cy + 2697480, wi - 182880
 seg = sw // 3
 for i, c in enumerate([SLATE, SAND, ACCENT]):
     box(n5, sx + i * seg, sy, seg, 118872, fill=c, rounded=False)
 text(n5, sx - 45720, sy + 182880, 2194560, 640080, [[("0", {"bold": True, "color": SLATE, "size": 26})],
-                                                     [("forgotten · coin flip", {"size": 15})]], size=14)
+                                                     [("forgotten", {"size": 16})]], size=16)
 text(n5, sx + sw - 2148840, sy + 182880, 2194560, 640080, [[("1", {"bold": True, "color": ACCENT, "size": 26})],
-                                                            [("always recognised", {"size": 15})]], size=14,
+                                                            [("always recognised", {"size": 16})]], size=16,
      align=PP_ALIGN.RIGHT)
-text(n5, x0, cy + ch_ - 914400, wi, 777240, [
-    [("Pass: ", {"bold": True, "color": NAVY}), ("whole 90% interval ≤ 0.1, threshold fixed in advance.", {})],
-    [("System: ", {"bold": True, "color": NAVY}), ("its worst copy — that’s where an attacker looks.", {})],
-], size=15, color=INK, spacing=2)
+text(n5, x0, cy + 3749040, wi, 822960, [
+    [("Pass  ", {"bold": True, "color": NAVY}), ("90% interval ≤ 0.1", {})],
+    [("System  ", {"bold": True, "color": NAVY}), ("its worst copy", {})],
+], size=18, color=INK, spacing=4)
+text(n5, x0, cy + ch_ - 457200, wi, 320040, "Full definition → Appendix A2", size=13, color=SAND, bold=True,
+     align=PP_ALIGN.RIGHT)
 k2 = snap(n5)
 key_line(n5, 8138160, "The test is not “can it still recognise them?” — it is “does it act like it never met them?”",
          size=24)
@@ -1436,5 +1444,61 @@ move_slide(prs, ids.index(n5.slide_id), 4)
 for concept, result in ((dC, S[5]), (mC, S[6])):  # concept slide right before its results slide
     ids = [sl.slide_id for sl in prs.slides]
     move_slide(prs, ids.index(concept.slide_id), ids.index(result.slide_id))
+
+# ---------------------------------------------------------------- speaker notes for B's slides (4–10), from the script
+import re
+from pathlib import Path
+
+SCRIPT_MD = Path(__file__).resolve().parent.parent / "docs" / "script_v2_B.md"
+
+
+def _plain(md):
+    """Markdown → plain notes text: drop emphasis marks, quote markers, italics."""
+    out = []
+    for line in md.splitlines():
+        line = line.strip()
+        if not line or line == "---":
+            continue
+        line = re.sub(r"^>\s?", "", line)
+        line = line.replace("**", "")
+        line = re.sub(r"(?<!\w)\*(.+?)\*(?!\w)", r"[\1]", line)  # *stage direction* → [stage direction]
+        line = line.replace("`", "")
+        if line:
+            out.append(line)
+    return out
+
+
+if SCRIPT_MD.exists():
+    md = SCRIPT_MD.read_text(encoding="utf-8")
+    sections = re.split(r"^## ", md, flags=re.M)
+    by_page = {}
+    handoff_in = handoff_out = []
+    for sec in sections:
+        head, _, body = sec.partition("\n")
+        m = re.match(r"第 (\d+) 页 (.+)", head)
+        if m:
+            by_page[int(m.group(1))] = (m.group(2).strip(), _plain(body))
+        elif head.startswith("接棒"):
+            handoff_in = _plain(body)
+        elif head.startswith("交棒"):
+            handoff_out = [l for l in _plain(body) if not l.startswith("[")]
+    slides = list(prs.slides)
+    for page, (title, lines) in sorted(by_page.items()):
+        notes = [f"【B · 第 {page} 页】{title}"]
+        if page == min(by_page):
+            notes += ["", "（接棒）"] + handoff_in
+        notes += [""]
+        for ln in lines:
+            if ln.startswith("▶"):
+                notes += ["", ln.replace("▶ 点击", "▶ 点击").strip()]
+            else:
+                notes.append(ln)
+        if page == max(by_page):
+            notes += ["", "（交棒）"] + handoff_out + ["", f"⏭ 换页 → 第 {page + 1} 页（A：判决与结局）"]
+        else:
+            nxt = by_page.get(page + 1, ("", []))[0]
+            notes += ["", f"⏭ 换页 → 第 {page + 1} 页：{nxt}"]
+        slides[page - 1].notes_slide.notes_text_frame.text = "\n".join(notes)
+
 prs.save(OUT)
 print("saved", OUT, "slides:", len(prs.slides))
